@@ -1,6 +1,7 @@
 import './fun.css';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+
+import { useNavigate, Link } from 'react-router-dom'; 
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -46,6 +47,7 @@ function Fun() {
     ];
     const Schools = ["Western", "Mac", "Laurier", "Queens"];
     const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
+    const Schools = ["Western", "McMaster", "Laurier", "Queens"];
     const YearOptions = [1, 2, 3, 4, "4+"];
 
     const handleLangChange = (e) => {
@@ -139,6 +141,8 @@ function Fun() {
             });
     
             navigate("/Home");
+
+            alert("Uploaded to fb, no next page");
         } catch (err) {
             alert(err.message);
         }
@@ -148,6 +152,7 @@ function Fun() {
 
     
     return (
+        <div className='signup'>
         <div className="form-container">
             <h1>Who are you???</h1>
 
@@ -283,10 +288,16 @@ function Fun() {
                     )}
                 </div>
 
-                <button type="submit" className="submit-btn">
+
+               <Link to="/AccountSettings">
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Creating Account...': ''}
                     Submit
                 </button>
+                </Link>
+
             </form>
+        </div>
         </div>
     );
 }
