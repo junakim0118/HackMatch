@@ -29,10 +29,13 @@ const auth = getAuth(app);
 
 // Your AccountPage content
 let name = "Nathan Wan";
-let bio = "Hello! I am a software developer. I love to code.";
+let bio = "Hello! I am a software developer who loves to code. I also love meeting new peoplpe so message me and say hi!";
 let github = "https://github.com/nathan-nw";
 let linkedin = "https://www.linkedin.com/in/nathan-wan-82355b258/";
 let website = "https://www.hackwestern.com/";
+
+let prompt =  ["What is your go-to midnight snack?", "What sorting algorithm are you?", "Whats your favourite song?", "Whats your coolest Hobby?"]; ;
+let answers = ["Pizza!", "Probably Bulbasort", "I love T-Swift!", "Of Course Leetcode"];
 
 function AccountPage() {
   const [email, setEmail] = useState("");
@@ -54,6 +57,17 @@ function AccountPage() {
           <div className="bio-header">Bio:</div>
           <div className="bio-text">{bio}</div>
         </div>
+        <div className="chat">
+          <div className="catagory">{prompt[0]}</div>
+          <div className = "chat-text">{answers[0]}</div>
+                    <div className="catagory">{prompt[1]}</div>
+          <div className = "chat-text">{answers[1]}</div>
+                    <div className="catagory">{prompt[2]}</div>
+          <div className = "chat-text">{answers[2]}</div>
+                    <div className="catagory">{prompt[3]}</div>
+          <div className = "chat-text">{answers[3]}</div>
+        </div>
+        <hr className = "line"/>
         <div className="links">
           <a href={github}>
             <FaGithub />
