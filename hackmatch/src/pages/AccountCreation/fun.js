@@ -1,6 +1,8 @@
 import './fun.css';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+
+import { useNavigate, Link } from 'react-router-dom'; 
+
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -253,10 +255,15 @@ function Fun() {
                         </ul>
                     )}
                 </div>
-                <Link to="/home">
-                <button type="submit" className="submit-btn">
+
+
+               <Link to="/AccountSettings">
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Creating Account...': ''}
                     Submit
-                </button></Link>
+                </button>
+                </Link>
+
             </form>
         </div>
         </div>
