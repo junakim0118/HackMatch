@@ -1,13 +1,51 @@
 import './home.css';
+import { useState } from 'react';
 
 const Home = () => {
+
+  const [name, setName] = useState('juna kim');
+  const [personIndex, setPersonIndex] = useState(0);
+
+  const persons = [
+    { name: 'juna kim', caffeine: 'coffee', codingTime: 'night', language: 'js', school: 'western' },
+    { name: 'person two', caffeine: 'tea', codingTime: 'day', language: 'python', school: 'eastern' },
+    { name: 'person three', caffeine: 'juice', codingTime: 'evening', language: 'java', school: 'southern' },
+    // Add more persons as needed
+  ];
+
+  
     const handleStoryClick = (id) => alert(`You clicked on story ${id}`);
-  const handleChoiceClick = (id) => alert(`You selected choice ${id}`);
-  let name = 'juna kim';
-  let caffeine = 'coffee';
-  let codingTime = 'night';
-  let language = 'js';
-  let school = 'western';
+    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
+
+const [isNo, setIsNo] = useState(false);
+
+  const leftToggleCard = async () => {
+    setIsNo(!isNo);
+    await delay(400);
+    setIsNo(isNo);
+    if (personIndex < persons.length - 1) {
+      setPersonIndex(personIndex + 1); // Move to the next person
+      setName(persons[personIndex + 1].name); // Update name to the next person's name
+    }
+  };
+  
+  const [isUndo, setIsUndo] = useState(false);
+
+  const undoToggleCard = () => {
+    setIsUndo(!isUndo);
+  };
+  const [isYes, setIsYes] = useState(false);
+
+  const rightToggleCard = async () => {
+    setIsYes(!isYes);
+    await delay(400);
+    setIsYes(isYes);
+    if (personIndex < persons.length - 1) {
+      setPersonIndex(personIndex + 1); // Move to the next person
+      setName(persons[personIndex + 1].name); // Update name to the next person's name
+    }
+  };
+  
     return (
         <div>
       {/* Stories Section */}
@@ -24,31 +62,48 @@ const Home = () => {
       </div>
 
       {/* Person Section */}
-      <div className="person">
+      {persons.map((person, index) => (
+          <div
+            key={index}
+            className={`person ${index === personIndex ? 'show' : 'hide'} ${isNo ? 'no' : isYes ? 'yes': ''}`}
+          >
         <div className="bitmoji">Bitmoji Content</div>
 
       {/* Name Section */}
       <p className="name">Name: {name}</p>
       {/* Things Section */}
       <div className="things">
-        <div className='thing'><p>{caffeine}</p></div>
-        <div className='thing'><p>{codingTime}</p></div>
-        <div className='thing'><p>{language}</p></div>
-        <div className='thing'><p>{school}</p></div>
+        <div className='thing'><p>{person.caffeine}</p></div>
+        <div className='thing'><p>{person.codingTime}</p></div>
+        <div className='thing'><p>{person.language}</p></div>
+        <div className='thing'><p>{person.school}</p></div>
       </div>
-      </div>
+</div>))}
+      
+      
       {/* Choose Section */}
       <div className="choose">
-        {[1, 2, 3].map((id) => (
+    
           <div
-            key={id}
             className="choice"
-            onClick={() => handleChoiceClick(id)}
+            onClick={leftToggleCard}
           >
-            {id}
+            {isNo ? 'x' : 'x'}
           </div>
-        ))}
+          <div
+            className="choice"
+            onClick={undoToggleCard}
+          >
+            {isUndo ? '-' : '-'}
+          </div>
+          <div
+            className="choice"
+            onClick={rightToggleCard}
+          >
+            {isYes ? 'y' : 'y'}
+          </div>
       </div>
+      
       <div className='menus'>
         <div className='menu'>home</div>
         <div className='menu'>match</div>
