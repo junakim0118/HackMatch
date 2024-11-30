@@ -1,3 +1,11 @@
+.home {
+    background-color: #ffffff;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+  }
 .stories{
     width:80%;
     height:15%;

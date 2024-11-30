@@ -6,7 +6,7 @@
   }
   
   /* Body styling */
-  body {
+  .nameInput body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
     color: #333;
@@ -19,7 +19,7 @@
   }
   
   /* Container for the form */
-  div {
+  .nameInput {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
   }
   
   /* Title styling */
-  h1 {
+  .nameInput h1 {
     font-size: 24px;
     color: #6a0dad; /* Purple */
     margin-bottom: 10px;
@@ -38,14 +38,14 @@
   }
   
   /* Subtitle styling */
-  p {
+  .nameInput p {
     font-size: 16px;
     color: #6a0dad;
     margin-bottom: 20px;
     font-weight: 400;
   }
 
-  label {
+  .nameInput label {
     font-size: 16px;
     color: #6a0dad;
     margin-bottom: 20px;
@@ -53,7 +53,7 @@
   }
   
   /* Input fields styling */
-  input {
+  .nameInput input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -63,12 +63,12 @@
     outline: none;
   }
   
-  input:focus {
+  .nameInput input:focus {
     border-color: #6a0dad; /* Purple */
   }
   
   /* Button styling */
-  button {
+  .nameInput button {
     width: 100%;
     padding: 12px;
     background-color: #6a0dad; /* Purple */
@@ -80,30 +80,30 @@
     margin-top: 10px;
   }
   
-  button:disabled {
+  .nameInput button:disabled {
     background-color: #9b4dca; /* Lighter Purple */
     cursor: not-allowed;
   }
   
   /* Responsive adjustments */
   @media (max-width: 480px) {
-    div {
+    .nameInput  {
       padding: 20px;
     }
   
-    h1 {
+    .nameInput h1 {
       font-size: 20px;
     }
   
-    p {
+    .nameInput p {
       font-size: 14px;
     }
   
-    input {
+    .nameInput input {
       font-size: 14px;
     }
   
-    button {
+    .nameInput button {
       font-size: 14px;
     }
   }

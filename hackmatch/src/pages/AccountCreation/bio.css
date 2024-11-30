@@ -6,7 +6,7 @@
   }
   
   /* Body styling */
-  body {
+  .bio body {
     font-family: 'Arial', sans-serif;
     background-color: #f9f9f9;
     color: #333;
@@ -19,7 +19,7 @@
   }
   
   /* Container for the form */
-  div {
+  .bio  {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
   }
   
   /* Title styling */
-  h1 {
+  .bio h1 {
     font-size: 24px;
     color: #6a0dad; /* Purple */
     margin-bottom: 20px;
@@ -38,7 +38,7 @@
   }
   
   /* Input fields styling (now using textarea) */
-  textarea {
+  .bio textarea {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -50,22 +50,22 @@
     resize: vertical; /* Allow vertical resizing but not horizontal */
   }
   
-  textarea:focus {
+  .bio textarea:focus {
     border-color: #6a0dad; /* Purple */
   }
   
   /* Text length indicator */
-  div {
+  .bio  {
     margin-top: 5px;
     font-size: 14px;
   }
   
-  div span {
+  .bio  span {
     font-size: 12px;
   }
   
   /* Button styling */
-  button {
+  .bio button {
     width: 100%;
     padding: 12px;
     background-color: #6a0dad; /* Purple */
@@ -77,26 +77,26 @@
     margin-top: 10px;
   }
   
-  button:disabled {
+  .bio button:disabled {
     background-color: #9b4dca; /* Lighter Purple */
     cursor: not-allowed;
   }
   
   /* Responsive adjustments */
   @media (max-width: 480px) {
-    div {
+    .bio  {
       padding: 20px;
     }
   
-    h1 {
+    .bio h1 {
       font-size: 20px;
     }
   
-    textarea {
+    .bio textarea {
       font-size: 14px;
     }
   
-    button {
+    .bio button {
       font-size: 14px;
     }
   }

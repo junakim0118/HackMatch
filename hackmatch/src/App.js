@@ -21,7 +21,7 @@ function App() {
         <Route path="/Links" element={<Links />} />
         <Route path="/Bio" element={<Bio />} />
         <Route path="/Fun" element={<Fun />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
     </Router>

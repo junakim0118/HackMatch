@@ -67,7 +67,7 @@ const undoToggleCardN = async () => {
   };
   
     return (
-        <div>
+        <div className='home'>
       {/* Stories Section */}
       <div className="stories">
         {[1, 2, 3, 4, 5].map((id) => (
