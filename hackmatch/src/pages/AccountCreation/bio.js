@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import './bio.css';
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -62,7 +63,7 @@ function Bio() {
     };
 
     return (
-        <div>
+        <div className='signup'>
             <h1>Tell us about yourself</h1>
             <form onSubmit={handleSubmit}>
                 <div style={{ marginBottom: '10px' }}>

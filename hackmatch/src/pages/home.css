@@ -1,3 +1,12 @@
+
+.home {
+    background-color: #ffffff;
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+  }
 .stories{
     width:80%;
     height:15%;
@@ -24,6 +33,41 @@
    background-color: rgb(21, 65, 196);
    margin-left: 7%;
    padding: 3%;
+   transition: transform 0.3s ease, opacity 0.3s ease;
+   z-index:5;
+}
+.person.show {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+  top: 10%;
+  left: 0%;
+  }
+  
+  .person.hide {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  top: 10%;
+  left: 0%;
+  }
+  
+
+.person.yes{
+    transform: scale(0.9) rotate(90deg);
+    transform-origin: 120% 60vh;
+}
+.person.no{
+    transform: scale(0.9) rotate(-90deg);
+    transform-origin: -20% 60vh;
+}
+.person.undoY{
+    transform: scale(0.9) rotate(90deg);
+    transform-origin: 120% 60vh;
+}
+.person.undoN{
+    transform: scale(0.9) rotate(-90deg);
+    transform-origin: -20% 60vh;
 }
 .bitmoji{
     width:100%;
@@ -52,6 +96,14 @@
     color:aliceblue;
     font-size: 20px;
     margin-top: 2%;
+    z-index: 2;
+}
+.name1{
+    margin-left:2%;
+    color:aliceblue;
+    font-size: 20px;
+    margin-top: 2%;
+    z-index: 1;
 }
 .choose{
     width:80%;
@@ -85,6 +137,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 5%;
+    text-decoration: none;
 }
 .menu{
     width: 50px;
@@ -98,4 +151,10 @@
     text-align: center;
     margin-left: 2%;
     margin-right: 2%;
+    text-decoration: none;
 }
+a{
+    text-decoration: none;
+}
+
+

@@ -1,7 +1,8 @@
-import "./Signup.css";
-import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import './Signup.css';
+import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'; 
+import "./Signup.css"
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -17,6 +18,7 @@ const firebaseConfig = {
   appId: "1:520362196145:web:338074b520500558317690",
   measurementId: "G-SZV8RS906G",
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -48,7 +50,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className='signup'>
       <h1>Sign Up Page</h1>
       <form onSubmit={handleSubmit}>
         <input
