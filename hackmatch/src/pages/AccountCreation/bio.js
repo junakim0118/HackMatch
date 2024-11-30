@@ -33,7 +33,7 @@ function Bio() {
         e.preventDefault();
         setLoading(true);
 
-        localStorage.setItem("bio", Bio);
+        localStorage.setItem("bio", bio);
 
         // Create the document in Firestore
         try {
@@ -66,8 +66,7 @@ function Bio() {
             <h1>Tell us about yourself</h1>
             <form onSubmit={handleSubmit}>
                 <div style={{ marginBottom: '10px' }}>
-                    <input
-                        type="text"
+                    <textarea
                         placeholder="Tell us about yourself"
                         value={bio}
                         onChange={handleBioChange}

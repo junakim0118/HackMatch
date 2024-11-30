@@ -1,3 +1,4 @@
+import './fun.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -27,7 +28,7 @@ const email = localStorage.getItem('email');
 function Fun() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    
+
     const [lang, setLang] = useState('');
     const [school, setSchool] = useState('');
     const [year, setYear] = useState('');
@@ -35,8 +36,8 @@ function Fun() {
     const [filteredSchools, setFilteredSchools] = useState([]);
 
     // States for both switches
-    const [dayNightMode, setDayNightMode] = useState(1); // 1 for Day, 0 for Night
-    const [frontBackMode, setFrontBackMode] = useState(1); // 1 for Frontend, 0 for Backend
+    const [dayNightMode, setDayNightMode] = useState('day'); // 'day' or 'night'
+    const [frontBackMode, setFrontBackMode] = useState('frontend'); // 'frontend' or 'backend'
 
     const programmingLanguages = [
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
@@ -84,13 +85,13 @@ function Fun() {
     };
 
     // Toggle Day/Night
-    const toggleDayNight = () => {
-        setDayNightMode(prevMode => (prevMode === 1 ? 0 : 1)); // 1 for Day, 0 for Night
+    const handleDayNightChange = (e) => {
+        setDayNightMode(e.target.value);
     };
 
     // Toggle Frontend/Backend
-    const toggleFrontBack = () => {
-        setFrontBackMode(prevMode => (prevMode === 1 ? 0 : 1)); // 1 for Frontend, 0 for Backend
+    const handleFrontBackChange = (e) => {
+        setFrontBackMode(e.target.value);
     };
 
     const handleYearChange = (e) => {
@@ -131,71 +132,67 @@ function Fun() {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h1>Who are you???</h1>
-            
-            {/* Day/Night Switch */}
-            <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                <p style={{ marginRight: '10px' }}>Day</p>
-                <div
-                    onClick={toggleDayNight}
-                    style={{
-                        width: '60px',
-                        height: '30px',
-                        backgroundColor: '#ccc',
-                        borderRadius: '15px',
-                        display: 'flex',
-                        justifyContent: dayNightMode === 1 ? 'flex-start' : 'flex-end',
-                        alignItems: 'center',
-                        padding: '5px',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: dayNightMode === 1 ? '#FFD700' : '#000',
-                            borderRadius: '50%'
-                        }}
-                    ></div>
-                </div>
-                <p style={{ marginLeft: '10px' }}>Night</p>
+
+            {/* Day/Night Selector */}
+            <div className="radio-group">
+                <p>Choose your mode:</p>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="day" 
+                        checked={dayNightMode === 'day'} 
+                        onChange={handleDayNightChange} 
+                        className="radio-input"
+                    />
+                    Day
+                </label>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="night" 
+                        checked={dayNightMode === 'night'} 
+                        onChange={handleDayNightChange} 
+                        className="radio-input"
+                    />
+                    Night
+                </label>
             </div>
 
-            {/* Frontend/Backend Switch */}
-            <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                <p style={{ marginRight: '10px' }}>Frontend</p>
-                <div
-                    onClick={toggleFrontBack}
-                    style={{
-                        width: '60px',
-                        height: '30px',
-                        backgroundColor: '#ccc',
-                        borderRadius: '15px',
-                        display: 'flex',
-                        justifyContent: frontBackMode === 1 ? 'flex-start' : 'flex-end',
-                        alignItems: 'center',
-                        padding: '5px',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <div
-                        style={{
-                            width: '20px',
-                            height: '20px',
-                            backgroundColor: frontBackMode === 1 ? '#FFD700' : '#000',
-                            borderRadius: '50%'
-                        }}
-                    ></div>
-                </div>
-                <p style={{ marginLeft: '10px' }}>Backend</p>
+            {/* Frontend/Backend Selector */}
+            <div className="radio-group">
+                <p>Choose your focus:</p>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="frontend" 
+                        checked={frontBackMode === 'frontend'} 
+                        onChange={handleFrontBackChange} 
+                        className="radio-input"
+                    />
+                    Frontend
+                </label>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="backend" 
+                        checked={frontBackMode === 'backend'} 
+                        onChange={handleFrontBackChange} 
+                        className="radio-input"
+                    />
+                    Backend
+                </label>
             </div>
 
             {/* Year Dropdown */}
-            <div style={{ marginBottom: '20px' }}>
+            <div className="form-group">
                 <p>What year are you in?</p>
-                <select value={year} onChange={handleYearChange} style={{ padding: '5px', fontSize: '14px' }}>
+                <select 
+                    value={year} 
+                    onChange={handleYearChange} 
+                    className="input-field"
+                >
                     <option value="">Select Year</option>
                     {YearOptions.map((option, index) => (
                         <option key={index} value={option}>
@@ -205,29 +202,22 @@ function Fun() {
                 </select>
             </div>
 
-            <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '10px', position: 'relative' }}>
+            <form onSubmit={handleSubmit} className="form">
+                <div className="form-group">
                     <p>What's your favorite language to code in?</p>
                     <input
                         type="text"
                         placeholder="Language"
                         value={lang}
                         onChange={handleLangChange}
+                        className="input-field"
                     />
                     {filteredLanguages.length > 0 && (
-                        <ul style={{
-                            maxHeight: '150px',
-                            overflowY: 'auto',
-                            width: "10%"
-                        }}>
+                        <ul className="suggestions">
                             {filteredLanguages.map((language, index) => (
                                 <li
                                     key={index}
-                                    style={{
-                                        padding: '5px 10px',
-                                        cursor: 'pointer',
-                                        borderBottom: '1px solid #eee'
-                                    }}
+                                    className="suggestion-item"
                                     onClick={() => handleLanguageClick(language)}
                                 >
                                     {language}
@@ -237,28 +227,21 @@ function Fun() {
                     )}
                 </div>
 
-                <div style={{ marginBottom: '10px', position: 'relative' }}>
+                <div className="form-group">
                     <p>What school do you go to?</p>
                     <input
                         type="text"
                         placeholder="School"
                         value={school}
                         onChange={handleSchoolChange}
+                        className="input-field"
                     />
                     {filteredSchools.length > 0 && (
-                        <ul style={{
-                            maxHeight: '150px',
-                            overflowY: 'auto',
-                            width: "10%"
-                        }}>
+                        <ul className="suggestions">
                             {filteredSchools.map((school, index) => (
                                 <li
                                     key={index}
-                                    style={{
-                                        padding: '5px 10px',
-                                        cursor: 'pointer',
-                                        borderBottom: '1px solid #eee'
-                                    }}
+                                    className="suggestion-item"
                                     onClick={() => handleSchoolClick(school)}
                                 >
                                     {school}
@@ -267,7 +250,8 @@ function Fun() {
                         </ul>
                     )}
                 </div>
-                <button type="submit">
+
+                <button type="submit" className="submit-btn">
                     Submit
                 </button>
             </form>

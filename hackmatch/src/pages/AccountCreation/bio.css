@@ -33,27 +33,12 @@
   h1 {
     font-size: 24px;
     color: #6a0dad; /* Purple */
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 600;
   }
   
-  /* Subtitle styling */
-  p {
-    font-size: 16px;
-    color: #6a0dad;
-    margin-bottom: 20px;
-    font-weight: 400;
-  }
-
-  label {
-    font-size: 16px;
-    color: #6a0dad;
-    margin-bottom: 20px;
-    font-weight: 400;
-  }
-  
-  /* Input fields styling */
-  input {
+  /* Input fields styling (now using textarea) */
+  textarea {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -61,10 +46,22 @@
     border: 1px solid #ddd;
     font-size: 16px;
     outline: none;
+    min-height: 100px; /* Make the text area large enough to hold multiple lines */
+    resize: vertical; /* Allow vertical resizing but not horizontal */
   }
   
-  input:focus {
+  textarea:focus {
     border-color: #6a0dad; /* Purple */
+  }
+  
+  /* Text length indicator */
+  div {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  div span {
+    font-size: 12px;
   }
   
   /* Button styling */
@@ -95,11 +92,7 @@
       font-size: 20px;
     }
   
-    p {
-      font-size: 14px;
-    }
-  
-    input {
+    textarea {
       font-size: 14px;
     }
   

@@ -87,28 +87,31 @@ function Links() {
         <div>
             <h1>Let's Get some important Links</h1>
             <form onSubmit={handleSubmit}>
-                <p>Enter the link to your LinkedIn</p>
+                <label>Enter the link to your LinkedIn</label>
                 <input
                     type="text"
                     placeholder="Linkedin Link"
                     value={LinkedIn}
                     onChange={(e) => setLinkedIn(e.target.value)}
                 />
-                <p>Enter the link to your Github</p>
+                <br></br>
+                <br></br>
+                <label>Enter the link to your Github</label>
                 <input
                     type="text"
                     placeholder="GitHub Link"
                     value={Github}
                     onChange={(e) => setGithub(e.target.value)}
                 />
-                <p>Enter the link to your Portfolio</p>
+                <br></br>
+                <br></br>
+                <label>Enter the link to your Portfolio</label>
                 <input
                     type="text"
                     placeholder="Portfolio Link"
                     value={Portfolio}
                     onChange={(e) => setPortfolio(e.target.value)}
                 />
-                <br></br>
                 <br></br>
                 <button type="submit" disabled={loading}>
                     {loading ? 'Creating Account...' : 'Continue'}

@@ -1,3 +1,4 @@
+import './Name.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -64,6 +65,7 @@ function Name() {
     return (
         <div>
             <h1>Account Created</h1>
+            <p>Now we need some basic hacker info from you!</p>
             <p>Let's Start With Your Name</p>
             <form onSubmit={handleSubmit}>
                 <input
