@@ -7,7 +7,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import "./Signup.css";
 
-// import { Button } from "@chakra-ui/react";
+// import { ChakraProvider, Button } from "@chakra-ui/react";
 
 // Your Firebase config
 const firebaseConfig = {

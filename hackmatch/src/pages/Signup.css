@@ -21,10 +21,14 @@
 
 .email {
   margin: 0.5vh;
+  width: 40vh;
+  text-align: center;
 }
 
 .password {
   margin: 0.5vh;
+  width: 40vh;
+  text-align: center;
 }
 
 .button {
