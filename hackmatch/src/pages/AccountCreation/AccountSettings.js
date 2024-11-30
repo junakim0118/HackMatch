@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import "./AccountSettings.css";
 
 const AccountSettings = () => {
+    //programming languages array
+    const programmingLanguages = [
+        "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
+        "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell",
+      ];
+      const Schools = ["Western", "McMaster", "Laurier", "Queens"];
+      const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
+
+
   // State for editable user info
   const [userInfo, setUserInfo] = useState({
     name: "Millicent Song",
@@ -14,7 +23,7 @@ const AccountSettings = () => {
     focus:"front-end",
     year:"2",
     favouriteLanguage:"java",
-    
+
 
   });
 
@@ -111,14 +120,89 @@ const AccountSettings = () => {
           />
         </label>
         <label>
-          School:
-          <input
-            type="text"
-            name="School Name"
-            value={userInfo.school}
+  School:
+  <select
+    name="school"
+    value={userInfo.school} 
+    onChange={handleInputChange}
+  >
+    {Schools.map((school, index) => (
+      <option key={index} value={school}>
+        {school}
+      </option>
+    ))}
+  </select>
+</label>
+        <label>
+          Caffeine:
+          <select
+            name="Choice of Caffeine"
+            value={userInfo.caffeine}
             onChange={handleInputChange}
-          />
+          >
+            {Caffeine.map((caffeine, index) => (
+              <option key={index} value={caffeine}>
+                {caffeine}
+              </option>
+            ))}
+          </select>
+                  </label>
+
+          <label>
+          Day or Night:
+          <select
+            type="text"
+            name="Early bird or night owl:"
+            value={userInfo.dayornight}
+            onChange={handleInputChange}
+          >
+             <option value="Early bird">Early Bird</option>
+             <option value="Night Owl">Night Owl</option>
+          </select>
+          </label>
+          <label>
+          Focus:
+          <select
+            type="text"
+            name="focus"
+            value={userInfo.focus}
+            onChange={handleInputChange}
+          >
+             <option value="Front End">Front End</option>
+             <option value="Back End">Back End</option>
+             <option value="Full Stack">Full Stack</option>
+          </select>
         </label>
+        <label>
+        year:
+        <select
+            name="year"
+            value={userInfo.year}
+            onChange={handleInputChange}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="4+">4+</option>
+          </select>
+          </label>
+        <label>
+          Favourite Programming language:
+          <select
+            name="favouriteLanguage"
+            value={userInfo.favouriteLanguage}
+            onChange={handleInputChange}
+          >
+            {programmingLanguages.map((language, index) => (
+              <option key={index} value={language}>
+                {language}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        
       </div>
 
       {/* Save and Logout Buttons */}

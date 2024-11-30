@@ -43,7 +43,7 @@ function Fun() {
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell"
     ];
-    const Schools = ["Western", "Mac", "Laurier", "Queens"];
+    const Schools = ["Western", "McMaster", "Laurier", "Queens"];
     const YearOptions = [1, 2, 3, 4, "4+"];
 
     const handleLangChange = (e) => {
