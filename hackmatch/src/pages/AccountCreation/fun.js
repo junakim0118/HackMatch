@@ -32,6 +32,7 @@ function Fun() {
     const [lang, setLang] = useState('');
     const [school, setSchool] = useState('');
     const [year, setYear] = useState('');
+    const [fuel, setFuel] = useState('');
     const [filteredLanguages, setFilteredLanguages] = useState([]);
     const [filteredSchools, setFilteredSchools] = useState([]);
 
@@ -44,6 +45,7 @@ function Fun() {
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell"
     ];
     const Schools = ["Western", "Mac", "Laurier", "Queens"];
+    const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
     const YearOptions = [1, 2, 3, 4, "4+"];
 
     const handleLangChange = (e) => {
@@ -98,16 +100,28 @@ function Fun() {
         setYear(e.target.value);
     };
 
+    const handleFuelChange = (e) => {
+        setFuel(e.target.value);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+    
+        // Validation
+        if (!lang || !school || !year || !fuel || !dayNightMode || !frontBackMode) {
+            alert("Please fill out all the fields before proceeding!");
+            setLoading(false);
+            return;
+        }
+    
         localStorage.setItem("day/night", dayNightMode);
         localStorage.setItem("front/back", frontBackMode);
         localStorage.setItem("year", year);
         localStorage.setItem("lang", lang);
         localStorage.setItem("school", school);
-
+        localStorage.setItem("fuel", fuel);
+    
         // Create the document in Firestore
         try {
             await setDoc(doc(db, "Users", email), {
@@ -119,26 +133,27 @@ function Fun() {
                 bio: localStorage.getItem("bio"),
                 daynight: dayNightMode,
                 frontback: frontBackMode,
-                lang:lang,
-                school:school
+                lang: lang,
+                school: school,
+                fuel: fuel
             });
-
-            alert("Uploaded to fb, no next page")
-            //navigate("/Fun");
+    
+            navigate("/Home");
         } catch (err) {
             alert(err.message);
         }
-
+    
         setLoading(false);
     };
 
+    
     return (
         <div className="form-container">
             <h1>Who are you???</h1>
 
             {/* Day/Night Selector */}
             <div className="radio-group">
-                <p>Choose your mode:</p>
+                <p>What kind of Hacker are you?:</p>
                 <label className="radio-label">
                     <input 
                         type="radio" 
@@ -147,7 +162,7 @@ function Fun() {
                         onChange={handleDayNightChange} 
                         className="radio-input"
                     />
-                    Day
+                    Day-Hacker
                 </label>
                 <label className="radio-label">
                     <input 
@@ -157,13 +172,13 @@ function Fun() {
                         onChange={handleDayNightChange} 
                         className="radio-input"
                     />
-                    Night
+                    Night-Hacker
                 </label>
             </div>
-
+            <br></br>
             {/* Frontend/Backend Selector */}
             <div className="radio-group">
-                <p>Choose your focus:</p>
+                <p>Whats your speciality?:</p>
                 <label className="radio-label">
                     <input 
                         type="radio" 
@@ -185,10 +200,26 @@ function Fun() {
                     Backend
                 </label>
             </div>
-
+            <br></br>
+            <div className="form-group">
+                <p>Whats Your Hackathon Fuel?</p>
+                <select 
+                    value={fuel} 
+                    onChange={handleFuelChange} 
+                    className="input-field"
+                >
+                    <option value="">Select Fuel</option>
+                    {Caffeine.map((option, index) => (
+                        <option key={index} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <br></br>
             {/* Year Dropdown */}
             <div className="form-group">
-                <p>What year are you in?</p>
+                <p>What school year are you in?</p>
                 <select 
                     value={year} 
                     onChange={handleYearChange} 
@@ -202,7 +233,7 @@ function Fun() {
                     ))}
                 </select>
             </div>
-
+            <br></br>
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-group">
                     <p>What's your favorite language to code in?</p>
@@ -216,18 +247,18 @@ function Fun() {
                     {filteredLanguages.length > 0 && (
                         <ul className="suggestions">
                             {filteredLanguages.map((language, index) => (
-                                <li
+                                <button
                                     key={index}
                                     className="suggestion-item"
                                     onClick={() => handleLanguageClick(language)}
                                 >
                                     {language}
-                                </li>
+                                </button>
                             ))}
                         </ul>
                     )}
                 </div>
-
+                <br></br>
                 <div className="form-group">
                     <p>What school do you go to?</p>
                     <input
@@ -240,13 +271,13 @@ function Fun() {
                     {filteredSchools.length > 0 && (
                         <ul className="suggestions">
                             {filteredSchools.map((school, index) => (
-                                <li
+                                <button
                                     key={index}
                                     className="suggestion-item"
                                     onClick={() => handleSchoolClick(school)}
                                 >
                                     {school}
-                                </li>
+                                </button>
                             ))}
                         </ul>
                     )}
