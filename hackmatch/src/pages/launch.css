@@ -1,4 +1,46 @@
 .logo {
-    width: 150px;
-    height: auto;
+    width: 400px;
+    height: 400px;
+
 }
+.launch-page {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 100vh;          
+    margin: 0;              
+    flex-direction: column; 
+  }
+  
+body{
+    background-color: #F6CEFC;
+}
+.button1 {
+    
+    background-color: #b11cbc; 
+    color: white; /* White text */
+    font-size: 16px; /* Text size */
+    font-weight: bold; /* Bold text */
+    border: 2px white; /* Remove border */
+  
+    /* Size and Shape */
+    padding: 10px 20px; /* Spacing inside the button */
+    border-radius: 50px; /* Makes the button round */
+  
+    /* Cursor and Transitions */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth animation for hover */
+  }
+  
+  button:hover {
+    /* Hover Effects */
+    background-color: #ffffff; /* Darker green */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow */
+  }
+  
+  button:active {
+    /* Active (Clicked) State */
+    background-color: #3e8e41; /* Even darker green */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transform: scale(0.98); /* Slightly smaller */
+  }
