@@ -28,20 +28,20 @@ const db = getFirestore(app);
 const email = localStorage.getItem('email'); 
 
 function Name() {
-
-
-    // name setting variables
     const [FirstName, setFirstName] = useState('');
     const [LastName, setLastName] = useState('');
     const [loading, setLoading] = useState(false);
-
-
-
-
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation for empty fields
+        if (!FirstName.trim() || !LastName.trim()) {
+            alert("Both First Name and Last Name are required!");
+            return;
+        }
+
         setLoading(true);
 
         localStorage.setItem("firstName", FirstName);
@@ -51,10 +51,9 @@ function Name() {
         try {
             await setDoc(doc(db, "Users", email), {
                 firstName: FirstName,
-                lastName: LastName
+                lastName: LastName,
             });
-            navigate("/Links"); 
-
+            navigate("/Links");
         } catch (err) {
             alert(err.message);
         }
@@ -86,7 +85,6 @@ function Name() {
             </form>
         </div>
     );
-    
 }
 
 export default Name;
