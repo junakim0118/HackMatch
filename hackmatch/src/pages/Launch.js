@@ -11,10 +11,11 @@ const Launch = () => {
    return (
        <div className = "launch-page">
           { <img src = {logo} alt="Logo" className="logo"/> }
-         
+         <Link to="/Signup">
            <button className="button1"onClick={()=>navigate('/Signup')}>Create a new account :)</button>
-          
+          </Link>
          </div>
+
        );
 }
 

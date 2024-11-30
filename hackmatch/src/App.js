@@ -8,20 +8,24 @@ import Fun from "./pages/AccountCreation/fun.js";
 // import Signup from "./pages/Signup"; // Your Signup component
 // import AccountCreation from "./pages/AccountCreation"; // Your AccountCreation component
 import Home from "./pages/home";
+import AccountSettings from "./pages/AccountCreation/AccountSettings.js";
 // import Signup from "./pages/Signup"; // Your Signup component
 // import AccountCreation from "./pages/AccountCreation"; // Your AccountCreation component
 // import Home from "./pages/home";
+import Launch from "./pages/Launch";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<Launch/>}/>
+        <Route path="/Signup" element={<Signup />} />
         <Route path="/Name" element={<Name />} />
         <Route path="/Links" element={<Links />} />
         <Route path="/Bio" element={<Bio />} />
         <Route path="/Fun" element={<Fun />} />
         <Route path="/" element={<Home />} />
+        <Route path="/AccountSettings" element={<AccountSettings />}/>
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
     </Router>
