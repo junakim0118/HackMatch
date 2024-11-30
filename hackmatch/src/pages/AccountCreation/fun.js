@@ -123,7 +123,8 @@ function Fun() {
                 school:school
             });
 
-            navigate("/Fun");
+            alert("Uploaded to fb, no next page")
+            //navigate("/Fun");
         } catch (err) {
             alert(err.message);
         }
