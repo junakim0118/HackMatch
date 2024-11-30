@@ -33,8 +33,23 @@
   h1 {
     font-size: 24px;
     color: #6a0dad; /* Purple */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 600;
+  }
+  
+  /* Subtitle styling */
+  p {
+    font-size: 16px;
+    color: #6a0dad;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  label {
+    font-size: 16px;
+    color: #6a0dad;
+    margin-bottom: 20px;
+    font-weight: 400;
   }
   
   /* Input fields styling */
@@ -78,6 +93,10 @@
   
     h1 {
       font-size: 20px;
+    }
+  
+    p {
+      font-size: 14px;
     }
   
     input {
