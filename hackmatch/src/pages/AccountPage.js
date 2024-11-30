@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { CgWebsite } from "react-icons/cg";
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -26,8 +27,12 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
+// Your AccountPage content
 let name = "Nathan Wan";
 let bio = "Hello! I am a software developer. I love to code.";
+let github = "https://github.com/nathan-nw";
+let linkedin = "https://www.linkedin.com/in/nathan-wan-82355b258/";
+let website = "https://www.hackwestern.com/";
 
 function AccountPage() {
   const [email, setEmail] = useState("");
@@ -48,6 +53,15 @@ function AccountPage() {
         <div className="bio">
           <div className="bio-header">Bio:</div>
           <div className="bio-text">{bio}</div>
+        </div>
+        <div className="links">
+          <a href={github}>
+            <FaGithub />
+          </a>
+          <a href={linkedin}>
+            <FaLinkedin />
+          </a>
+          <a href={website}>{website && <CgWebsite />}</a>
         </div>
       </div>
     </div>

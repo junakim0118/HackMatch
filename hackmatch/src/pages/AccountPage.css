@@ -73,3 +73,19 @@
   font-size: 1rem;
   line-height: 1.5; /* Adjust line spacing for better readability */
 }
+
+.links {
+  display: flex;
+  gap: 1rem; /* Adds space between icons */
+  margin-top: 1rem; /* Adds space above the links section */
+}
+
+.links svg {
+  /* Target all icons (SVG elements) inside the links section */
+  width: 2.5rem; /* Adjust width for larger size */
+  height: 2.5rem; /* Adjust height for larger size */
+  padding: 0.5rem; /* Adds padding inside the icon */
+  border-radius: 50%; /* Optional: makes icons circular */
+  background-color: #f8f9fa; /* Optional: adds a background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */
+}
