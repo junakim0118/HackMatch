@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom';
 import "./AccountSettings.css";
 
 const AccountSettings = () => {
@@ -130,6 +131,13 @@ const AccountSettings = () => {
           Log Out
         </button>
       </div>
+      <div className='menus'>
+        <div className='menu'><Link to='/home'>home</Link></div>
+        <div className='menu'>match</div>
+        <div className='menu'>message</div>
+        <div className='menu'><Link to='/AccountSettings'>profile</Link></div>
+      </div>
+
     </div>
   );
 };

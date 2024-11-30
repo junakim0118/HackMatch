@@ -1,5 +1,6 @@
 import './home.css';
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
 
 const Home = () => {
 
@@ -125,10 +126,10 @@ const undoToggleCardN = async () => {
       </div>
       
       <div className='menus'>
-        <div className='menu'>home</div>
+        <div className='menu'><Link to='/home'>home</Link></div>
         <div className='menu'>match</div>
         <div className='menu'>message</div>
-        <div className='menu'>profile</div>
+        <div className='menu'><Link to='/AccountSettings'>profile</Link></div>
       </div>
 
     </div>
