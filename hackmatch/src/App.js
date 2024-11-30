@@ -11,6 +11,7 @@ import Home from "./pages/home";
 // import Signup from "./pages/Signup"; // Your Signup component
 // import AccountCreation from "./pages/AccountCreation"; // Your AccountCreation component
 // import Home from "./pages/home";
+import Account from "./pages/AccountPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Bio" element={<Bio />} />
         <Route path="/Fun" element={<Fun />} />
         <Route path="/" element={<Home />} />
+        <Route path="/Account" element={<Account />} />
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
     </Router>

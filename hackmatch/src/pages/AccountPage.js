@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import "./Signup.css";
+// import "./Signup.css";
+import "./AccountPage.css";
+import icon from "../images/icon.png";
 
 // import { ChakraProvider, Button } from "@chakra-ui/react";
 
@@ -24,6 +26,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
+let name = "Nathan Wan";
+let bio = "Hello! I am a software developer. I love to code.";
+
 function AccountPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,18 +38,17 @@ function AccountPage() {
 
   return (
     <div className="page">
-      <div className="topcontainer">
-        {/* <div className="title"> */}
-        <text>Name</text>
-        {/* <div
-          style={{
-            width: size, // Set the width of the circle
-            height: size, // Set the height of the circle
-            backgroundColor: color, // Set the circle's color
-            borderRadius: "50%", // Makes the div into a circle
-          }}
-        ></div> */}
-        {/* </div> */}
+      <div className="top">
+        <img src={icon} alt="description" className="icon" />
+        <div className="header">
+          <text classNam="name">{name}</text>
+        </div>
+      </div>
+      <div className="bottom">
+        <div className="bio">
+          <div className="bio-header">Bio:</div>
+          <div className="bio-text">{bio}</div>
+        </div>
       </div>
     </div>
   );

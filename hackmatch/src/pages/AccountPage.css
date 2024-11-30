@@ -1,0 +1,75 @@
+.page {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the start of the page */
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  /* align-items: center; */
+  /* padding: 1rem 2rem; */
+  background-color: #f8f9fa;
+  /* border-bottom: 1px solid #e9ecef; */
+  border: 1px solid #000000;
+  text-align: left;
+  /* width: 100%; */
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+
+  border: 1px solid #000000;
+}
+
+.icon {
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+  background-color: aliceblue;
+  /* border: 10px solid #ffd76c; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-right: 10%;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  border: 1px solid #000000;
+  margin-top: 1rem;
+  height: 100vh;
+}
+
+.bio {
+  font-size: 1rem;
+  text-align: left;
+  margin-right: 10%;
+}
+
+.bio-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem; /* Add space between the header and text */
+}
+
+.bio-text {
+  font-size: 1rem;
+  line-height: 1.5; /* Adjust line spacing for better readability */
+}
