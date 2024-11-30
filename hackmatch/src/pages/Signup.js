@@ -1,3 +1,4 @@
+import './Signup.css';
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; 
@@ -33,11 +34,13 @@ function Signup() {
     e.preventDefault();
     setLoading(true);
 
+    localStorage.setItem('email',email);
+
     try {
-      localStorage.setItem('email',email);
+
       await createUserWithEmailAndPassword(auth, email, password);
 
-      navigate('/accountCreation'); 
+      navigate("/Name"); 
     } catch (err) {
       alert(err.message);
     }
