@@ -7,7 +7,7 @@ const Home = () => {
   const [personIndex, setPersonIndex] = useState(0);
 
   const persons = [
-    { name: 'juna kim', caffeine: 'coffee', codingTime: 'night', language: 'js', school: 'western' },
+    { name: 'juna kim', caffeine: 'coffee', codingTime: 'night', language: 'js', school: 'western' }, //do status of no, yes, matched
     { name: 'person two', caffeine: 'tea', codingTime: 'day', language: 'python', school: 'eastern' },
     { name: 'person three', caffeine: 'juice', codingTime: 'evening', language: 'java', school: 'southern' },
     // Add more persons as needed
@@ -29,10 +29,30 @@ const [isNo, setIsNo] = useState(false);
     }
   };
   
-  const [isUndo, setIsUndo] = useState(false);
-
-  const undoToggleCard = () => {
-    setIsUndo(!isUndo);
+  const [isUndoY, setIsUndoY] = useState(false);
+  const [isUndoN, setIsUndoN] = useState(false);
+const undoToggleCardY = async () => {
+  setIsUndoY(!isUndoY);
+        await delay(400);
+        setIsUndoY(isUndoY);
+}
+const undoToggleCardN = async () => {
+  setIsUndoN(!isUndoN);
+        await delay(400);
+        setIsUndoN(isUndoN);
+}
+  const undoToggleCard = async () => {
+    if (personIndex >= 0) {
+      
+      if (isNo && !isYes){
+        undoToggleCardY();
+        
+      } else if (isYes && !isNo){
+        undoToggleCardN();
+      }
+      setPersonIndex(personIndex - 1); // Move to the next person
+      setName(persons[personIndex - 1].name); // Update name to the next person's name
+    }
   };
   const [isYes, setIsYes] = useState(false);
 
@@ -65,7 +85,7 @@ const [isNo, setIsNo] = useState(false);
       {persons.map((person, index) => (
           <div
             key={index}
-            className={`person ${index === personIndex ? 'show' : 'hide'} ${isNo ? 'no' : isYes ? 'yes': ''}`}
+            className={`person ${index === personIndex ? 'show' : 'hide'} ${isUndoY ? 'yes' : isUndoN ? 'no' : isNo ? 'no' : isYes ? 'yes': ''}`}
           >
         <div className="bitmoji">Bitmoji Content</div>
 
@@ -94,7 +114,7 @@ const [isNo, setIsNo] = useState(false);
             className="choice"
             onClick={undoToggleCard}
           >
-            {isUndo ? '-' : '-'}
+            {isUndoY ? '-' : '-'}
           </div>
           <div
             className="choice"
