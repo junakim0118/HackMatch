@@ -57,7 +57,7 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="account-settings">
+    <div className="signup">
       <h1>Account Settings</h1>
 
       {/* Profile Picture Section */}
