@@ -63,7 +63,7 @@ function Name() {
     };
 
     return (
-        <div>
+        <div className='signup'>
             <h1>Account Created</h1>
             <p>Now we need some basic hacker info from you!</p>
             <p>Let's Start With Your Name</p>

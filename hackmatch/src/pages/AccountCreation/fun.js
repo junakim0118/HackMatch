@@ -1,6 +1,8 @@
 import './fun.css';
 import React, { useState } from 'react';
+
 import { useNavigate, Link } from 'react-router-dom'; 
+
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -123,7 +125,8 @@ function Fun() {
                 school:school
             });
 
-            alert("Uploaded to fb, no next page")
+            alert("Uploaded to fb, no next page");
+
             //navigate("/Fun");
         } catch (err) {
             alert(err.message);
@@ -133,6 +136,7 @@ function Fun() {
     };
 
     return (
+        <div className='signup'>
         <div className="form-container">
             <h1>Who are you???</h1>
 
@@ -252,13 +256,16 @@ function Fun() {
                     )}
                 </div>
 
+
                <Link to="/AccountSettings">
                 <button type="submit" disabled={loading}>
                     {loading ? 'Creating Account...': ''}
                     Submit
                 </button>
                 </Link>
+
             </form>
+        </div>
         </div>
     );
 }
