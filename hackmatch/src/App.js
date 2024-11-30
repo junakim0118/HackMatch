@@ -25,6 +25,9 @@ function App() {
         <Route path="/Bio" element={<Bio />} />
         <Route path="/Fun" element={<Fun />} />
 
+        <Route path="/home" element={<Home />} />
+        <Route path="/AccountSettings" element={<AccountSettings />}/>
+        
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
     </Router>

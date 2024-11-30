@@ -13,6 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
     min-height: 100vh;
     padding: 20px;
     margin: 0;
@@ -27,7 +28,15 @@
     padding: 30px;
     width: 100%;
     max-width: 400px;
+    
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    justify-self: center;
   }
   
   /* Title styling */

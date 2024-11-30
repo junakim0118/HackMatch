@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 import { useNavigate, Link } from 'react-router-dom'; 
 
-
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
