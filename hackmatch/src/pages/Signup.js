@@ -2,7 +2,7 @@ import './Signup.css';
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'; 
-import "./Signup.css"
+import './Signup.css';
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
@@ -48,8 +48,10 @@ function Signup() {
   };
 
   return (
-    <div className='signup'>
-      <h1>Sign Up Page</h1>
+    <div className="page">
+      <div className="container">
+      <h1 className="log">S I G N U P</h1>
+      <hr className = "line"/>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -69,6 +71,7 @@ function Signup() {
           {loading ? "Creating Account..." : "Sign Up"}
         </button>
       </form>
+      </div>
     </div>
   );
 }

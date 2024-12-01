@@ -1,109 +1,100 @@
+.container {
+  display: flex;
+  justify-content: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  flex-direction: column; /* Stack items vertically */
+  height: 40vh;
+  background-color: #ffffff;
+  width: 80%;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
+  padding: 20px; 
+}
 
   
-  /* Body styling */
-  .signup body  {
+  .page {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40vh;
-    background-color: #ffffff;
-    width: 80%;
     flex-direction: column;
-    border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
-  }
-  
-  /* Container for the form */
-  .signup {
-    display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 100vh;
-    background-color: #ffffff;
-    width: 80%;
-    flex-direction: column;
-    border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
+    background-color: #CCCCFF !important; /* Light purple background */
   }
-  
-  
-  /* Title styling */
-  .signup h1 {
-    font-size: 24px;
-    color: #b46de7; /* Purple */
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-  
-  /* Input fields styling */
-  .signup input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    outline: none;
-    font-family: "Courier New", Courier, monospace;
 
-  }
-  
-  .signup input:focus {
-    border-color: #6a0dad; /* Purple */
-  }
-  
-  /* Button styling */
-  .signup button {
-    width: 100%;
-    padding: 12px;
-    background-color: #6a0dad; /* Purple */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .signup button:disabled {
-    background-color: #9b4dca; /* Lighter Purple */
-    cursor: not-allowed;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .signup  {
-      padding: 20px;
-    }
-  
-    .signup  h1 {
-      font-size: 20px;
-    }
-  
-    .signup input {
-      font-size: 14px;
-    }
-  
-    .signup button {
-      font-size: 14px;
-    }
-  }
-  
-  .email {
-    width: 75%;
-    height: 30%;
-    border-radius: 10px;
-    border: 1px solid #b08cec;
-    padding: 10px;
-    font-size: 16px;
+
+.email {
+  width: 75%;
+  height: 30%;
+  border-radius: 10px;
+  border: 1px solid #b08cec;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 1vh;
+  box-sizing: border-box;
+
 }
 
 .password{
-    width: 75%;
-    height: 30%;
-    border-radius: 10px;
-    border: 1px solid #b08cec;
-    padding: 10px;
-    font-size: 16px;
+  width: 75%;
+  height: 30%;
+  border-radius: 10px;
+  border: 1px solid #b08cec;
+  padding: 10px;
+  font-size: 16px;
 
 }
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #b11cbc;
+  box-shadow: 0 0 5px rgba(177, 28, 188, 0.5);
+}
+
+.log{
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 5%;
+  color:#b08cec;
+margin-bottom: 0.1rem; /* Reduce space below the heading */
+text-align: center;
+}
+
+.line {
+width: 90%; /* Full width of the container */
+border: none; /* Remove default border styling */
+border-top: 2px solid #ccc; /* Add a custom line */
+}
+
+.acc{
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5%;
+  color:#b08cec;
+  margin-bottom: 0.1rem; /* Reduce space below the heading */
+  text-align: center;
+}
+
+.submit {
+  background-color: #b08cec;
+  color: white;
+  font-size: 16px;
+  border: 2px white;
+  margin-top: 20px; /* Adds space above the button */
+  font-weight: 550;
+  box-shadow: 0 0 8px 2px #af51e2;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover and click effects */
+  align-self: center; /* Centers the button inside the form */
+}
+
+.submit:hover {
+  background-color: #9b19a8; /* Darker purple on hover */
+}
+
+.submit:active {
+  transform: scale(0.95); /* Shrink slightly on click */
+}
+
