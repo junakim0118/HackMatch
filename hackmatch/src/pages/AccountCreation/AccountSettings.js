@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase.js"
@@ -42,7 +42,6 @@ if (!getApps().length) {
     app = getApps()[0]; // Use the existing app instance
 }
 
-const db = getFirestore(app);
 const auth = getAuth(app);
 
 const AccountSettings = () => {
