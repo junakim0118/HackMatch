@@ -253,25 +253,6 @@ const handleHobbyChange = (e) => {
     return (
         <div className="signup">
             <h1>A C C O U N T S E T T I N G S</h1>
-  <div className="profile-info">
-    <label>
-      Name:
-      <input
-        type="text"
-        name="name"
-        value={name}
-        onChange={handleNameChange}
-      />
-    </label>
-    <label>
-      Bio:
-      <textarea
-        name="bio"
-        value={bio}
-        onChange={handleBioChange}
-      />
-    </label>
-  </div>
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
   <label htmlFor="profilePic">
@@ -351,6 +332,25 @@ const handleHobbyChange = (e) => {
   </label>
 
 </div>
+  <div className="profile-info">
+    <label>
+      Name:
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleNameChange}
+      />
+    </label>
+    <label>
+      Bio:
+      <textarea
+        name="bio"
+        value={bio}
+        onChange={handleBioChange}
+      />
+    </label>
+  </div>
 
       {/* User Information Section */}
       <div className="user-info">
