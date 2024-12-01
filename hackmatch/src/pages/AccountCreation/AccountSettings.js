@@ -2,31 +2,14 @@ import { IoHome } from "react-icons/io5";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../../firebase.js"
 
-async function getData(collection, document, field){
-    const docref = doc(db, collection, document);
-    const docsnap = await getDoc(docref);
-    return (String(docsnap.data()[field]));
-}
-
- let linkedin = "";
-
-const email = localStorage.getItem("email");
-console.log(email);
-
-(getData("Users", email, "LinkedIn")).then(result => {
-    linkedin = result;
-  });
-
-//
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -65,7 +48,6 @@ const AccountSettings = () => {
     const [school, setSchool] = useState("");
     const [email, setEmail] = useState("");
 
-    const navigate = useNavigate();
 
     // Handles LinkedIn input
 const handleLinkedInChange = (e) => {
@@ -142,6 +124,8 @@ const handleSchoolChange = (e) => {
   setSchool(e.target.value);
 };
 
+
+    const navigate = useNavigate();
 
     // Handles profile picture upload
     const handleProfilePicUpload = (e) => {
@@ -257,8 +241,8 @@ const handleSchoolChange = (e) => {
     const Caffeine = ["Coffee", "Brewed tea", "Energy Drinks", "No caffeine", "Matcha", "Sugar"];
 
     return (
-        <div className="signup">
-            <h1>Account Settings</h1>
+      <div className="signup">
+      <h1>Account Settings</h1>
 
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
@@ -315,7 +299,7 @@ const handleSchoolChange = (e) => {
                 <input
                     type="url"
                     name="Linkedin Link"
-                    placeholder= {linkedin}
+                    placeholder="https://link.ca"
                     value={LinkedIn}
                     onChange={(e) => setLinkedIn(e.target.value)}
                 />
@@ -475,6 +459,7 @@ const handleSchoolChange = (e) => {
       </div>
       <footer className='menus'>
         <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
         <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
         <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
       </footer>
