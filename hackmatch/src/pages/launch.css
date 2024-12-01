@@ -1,6 +1,7 @@
 .logo {
-    width: 600px;
-    height: 600px;
+    width: 50vh;
+    height: 50vh;
+    margin-bottom: 0.05px;
 
 }
 .launch-page {
@@ -17,20 +18,62 @@ body{
 }
 .button1 {
     
-    background-color: #b11cbc; 
+    background-color: #b08cec; 
     color: white; /* White text */
     font-size: 16px; /* Text size */
     font-weight: bold; /* Bold text */
     border: 2px white; /* Remove border */
+    margin-top: -100px;
   
     /* Size and Shape */
     padding: 10px 20px; /* Spacing inside the button */
     border-radius: 50px; /* Makes the button round */
+}@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #b11cbc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.button span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+    width: 0;
+    animation: typing 2s steps(10, end), blink 0.5s step-end infinite alternate;
+}
+  .button2 {
+    
+    background-color: #703dbb ; 
+    color: white; /* White text */
+    font-size: 16px; /* Text size */
+    font-weight: bold; /* Bold text */
+    border: 2px white; /* Remove border */
+    margin: 10px;
+    /* Size and Shape */
+    padding: 10px 20px; /* Spacing inside the button */
+    border-radius: 50px; /* Makes the button round */
+}
   
-    /* Cursor and Transitions */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: all 0.3s ease; /* Smooth animation for hover */
-  }
+
+  
   
   button:hover {
     /* Hover Effects */
