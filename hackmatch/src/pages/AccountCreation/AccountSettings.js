@@ -1,4 +1,3 @@
-
 import { IoHome } from "react-icons/io5";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
@@ -8,7 +7,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import pic1 from "../../images/characters/character.jpg";
 import pic2 from "../../images/characters/char2.jpg";
@@ -20,10 +20,11 @@ const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
     authDomain: "hackmatch-9fef5.firebaseapp.com",
     projectId: "hackmatch-9fef5",
-    storageBucket: "hackmatch-9fef5.firebasestorage.app",
+    storageBucket: "hackmatch-9fef5.appspot.com",
     messagingSenderId: "520362196145",
     appId: "1:520362196145:web:338074b520500558317690",
 };
+
 let app;
 if (!getApps().length) {
     app = initializeApp(firebaseConfig);
@@ -32,9 +33,7 @@ if (!getApps().length) {
 }
 
 const db = getFirestore(app);
-
-const email = localStorage.getItem("email");
-
+const auth = getAuth(app);
 
 const AccountSettings = () => {
 
@@ -144,50 +143,57 @@ const handleHobbyChange = (e) => {
     setHobby(e.target.value);
 };
 
-// Handles logout functionality
-const handleLogout = () => {
-    alert("You have been logged out.");
-    navigate("/login"); // Redirect to login page (replace with your route)
-};
-
     const navigate = useNavigate();
 
-    // Fetch user data when the component mounts
+    // Fetch authenticated user's email
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const docRef = doc(db, "Users", email);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    setName(data.firstName + " " + data.lastName);
-                    setLinkedIn(data.LinkedIn || "");
-                    setGithub(data.github || "");
-                    setPortfolio(data.portfolio || "");
-                    setEmail(data.email || "");
-                    setBio(data.bio || "");
-                    setYear(data.year || "");
-                    setDayorNight(data.dayornight || "");
-                    setFocus(data.focus || "");
-                    setMidnightsnack(data.midnightsnack || "");
-                    setAlgorithm(data.algorithm || "");
-                    setSong(data.song || "");
-                    setHobby(data.hobby || "");
-                    setLanguage(data.favouriteLanguage || "");
-                    setCaffeine(data.caffeine || "");
-                    setSchool(data.School || "");
-                    
-                } else {
-                    console.log("No such document!");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user && user.email) {
+                setEmail(user.email);
+            } else {
+                console.log("No authenticated user found.");
+                navigate("/login"); // Redirect to login if no user is found
             }
-        };
+        });
+        return () => unsubscribe();
+    }, [auth, navigate]);
 
-        fetchUserData();
-    }, []);
+    // Fetch user data from Firestore
+    useEffect(() => {
+        if (email) {
+            const fetchUserData = async () => {
+                try {
+                    const docRef = doc(db, "Users", email);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        setName(`${data.firstName || ""} ${data.lastName || ""}`);
+                        setLinkedIn(data.LinkedIn || "");
+                        setGithub(data.github || "");
+                        setPortfolio(data.portfolio || "");
+                        setBio(data.bio || "");
+                        setYear(data.year || "");
+                        setDayorNight(data.daynight || "");
+                        setFocus(data.frontback || "");
+                        setMidnightsnack(data.midnightsnack || "");
+                        setAlgorithm(data.algorithm || "");
+                        setSong(data.song || "");
+                        setHobby(data.hobby || "");
+                        setLanguage(data.lang || "");
+                        setCaffeine(data.fuel || "");
+                        setSchool(data.school || "");
+                    } else {
+                        alert("No such document in Firestore!");
+                    }
+                } catch (error) {
+                    alert("Error fetching user data:", error);
+                }
+            };
+
+            fetchUserData();
+        }
+    }, [email]);
 
     const handleFirestoreUpdate = async () => {
         try {
@@ -201,15 +207,15 @@ const handleLogout = () => {
                 portfolio: Portfolio,
                 bio,
                 year,
-                dayornight,
-                focus,
+                daynight: dayornight,
+                frontback: focus,
                 midnightsnack,
                 algorithm,
                 song,
                 hobby,
-                favouriteLanguage,
-                caffeine,
-                
+                lang: favouriteLanguage,
+                fuel: caffeine,
+                school,
             });
 
             alert("Profile updated successfully!");
@@ -225,8 +231,18 @@ const handleLogout = () => {
         handleFirestoreUpdate();
     };
 
+    const handleLogout = () => {
+        auth.signOut()
+            .then(() => {
+                alert("You have been logged out.");
+                navigate("/login");
+            })
+            .catch((error) => {
+                console.error("Logout error:", error);
+                alert("Error logging out.");
+            });
+    };
 
-    //programming languages array
     const programmingLanguages = [
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell",
@@ -389,168 +405,151 @@ const handleLogout = () => {
                     onChange={(e) => setLinkedIn(e.target.value)}
                 />
                 </label>
-                <label>Github:
                 <input
-                    type="url"
-                    name="GitHub Link"
-                    placeholder="https://link.ca"
-                    value={Github}
-                    onChange={(e) => setGithub(e.target.value)}
+                    type="file"
+                    id="profilePic"
+                    accept="image/*"
+                    onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) setProfilePic(URL.createObjectURL(file));
+                    }}
+                    hidden
                 />
-                </label>
-                <label> Portfolio:
-                <input
-                    type="url"
-                    name="Portfolio Link"
-                    placeholder="https://link.ca"
-                    value={Portfolio}
-                    onChange={(e) => setPortfolio(e.target.value)}
-                />
+                <div className="profile-info">
+                    <label>
+                        Name:
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Bio:
+                        <textarea
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                        />
+                    </label>
+                </div>
+            </div>
+
+            {/* User Information Section */}
+            <div className="user-info">
+                <label>
+                    Email:
+                    <input
+                        type="email"
+                        value={email}
+                        disabled
+                    />
                 </label>
                 <label>
-  School:
-  <select
-    name="school"
-    value={school} 
-    onChange={handleSchoolChange}
-  >
-    {Schools.map((school, index) => (
-      <option key={index} value={school}>
-        {school}
-      </option>
-    ))}
-  </select>
-</label>
-        <label>
-          Caffeine:
-          <select
-            name="Choice of Caffeine"
-            value={caffeine}
-            onChange={handleCaffeineChange}
-          >
-            {Caffeine.map((caffeine, index) => (
-              <option key={index} value={caffeine}>
-                {caffeine}
-              </option>
-            ))}
-          </select>
-                  </label>
+                    LinkedIn:
+                    <input
+                        type="url"
+                        value={LinkedIn}
+                        onChange={(e) => setLinkedIn(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Github:
+                    <input
+                        type="url"
+                        value={Github}
+                        onChange={(e) => setGithub(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Portfolio:
+                    <input
+                        type="url"
+                        value={Portfolio}
+                        onChange={(e) => setPortfolio(e.target.value)}
+                    />
+                </label>
+                <label>
+                    School:
+                    <select
+                        value={school}
+                        onChange={(e) => setSchool(e.target.value)}
+                    >
+                        {Schools.map((school, index) => (
+                            <option key={index} value={school}>
+                                {school}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label>
+                    Caffeine:
+                    <select
+                        value={caffeine}
+                        onChange={(e) => setCaffeine(e.target.value)}
+                    >
+                        {Caffeine.map((item, index) => (
+                            <option key={index} value={item}>
+                                {item}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label>
+                    Day or Night:
+                    <select
+                        value={dayornight}
+                        onChange={(e) => setDayorNight(e.target.value)}
+                    >
+                        <option value="day">Day</option>
+                        <option value="night">Night</option>
+                    </select>
+                </label>
+                <label>
+                    Focus:
+                    <select
+                        value={focus}
+                        onChange={(e) => setFocus(e.target.value)}
+                    >
+                        <option value="Front End">Front End</option>
+                        <option value="Back End">Back End</option>
+                        <option value="Full Stack">Full Stack</option>
+                    </select>
+                </label>
+                <label>
+                    Year:
+                    <select
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                    >
+                        {[1, 2, 3, 4, "4+"].map((yr, index) => (
+                            <option key={index} value={yr}>
+                                {yr}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+                <label>
+                    Favorite Language:
+                    <select
+                        value={favouriteLanguage}
+                        onChange={(e) => setLanguage(e.target.value)}
+                    >
+                        {programmingLanguages.map((lang, index) => (
+                            <option key={index} value={lang}>
+                                {lang}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </div>
 
-          <label>
-          Day or Night:
-          <select
-            type="text"
-            name="Early bird or night owl:"
-            value={dayornight}
-            onChange={handleDayorNightChange}
-          >
-             <option value="Early bird">Early Bird</option>
-             <option value="Night Owl">Night Owl</option>
-          </select>
-          </label>
-          <label>
-          Focus:
-          <select
-            type="text"
-            name="focus"
-            value={focus}
-            onChange={handleFocusChange}
-          >
-             <option value="Front End">Front End</option>
-             <option value="Back End">Back End</option>
-             <option value="Full Stack">Full Stack</option>
-          </select>
-        </label>
-        <label>
-        Year:
-        <select
-            name="Year"
-            value={year}
-            onChange={handleYearChange}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="4+">4+</option>
-          </select>
-          </label>
-        <label>
-          Favourite Programming language:
-          <select
-            name="favouriteLanguage"
-            value={favouriteLanguage}
-            onChange={handleLanguageChange}
-          >
-            {programmingLanguages.map((language, index) => (
-              <option key={index} value={language}>
-                {language}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label>
-          Go-to Midnight Snack:
-          <input
-            type="text"
-            name="midnightsnack"
-            value={midnightsnack}
-            onChange={handleSnackChange}
-          />
-        </label>
-
-        <label>
-          What sorting algorithm are you?:
-          <input
-            type="text"
-            name="sortingalgorithm"
-            value={algorithm}
-            onChange={handleAlgorithmChange}
-          />
-        </label>
-
-        <label>
-          What's your favourite song?:
-          <input
-            type="text"
-            name="song"
-            value={song}
-            onChange={handleSongChange}
-          />
-        </label>
-
-        <label>
-          What's your coolest hobby?:
-          <input
-            type="text"
-            name="hobby"
-            value={hobby}
-            onChange={handleHobbyChange}
-          />
-        </label>
-
-        
-      </div>
-
-      {/* Save and Logout Buttons */}
-      <div className="button-group">
-        <button className="save-button" onClick={handleSubmit}>
-          Save Changes
-        </button>
-        <button className="logout-button" onClick={handleLogout}>
-          Log Out
-        </button>
-      </div>
-      <footer className='menus'>
-        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
-        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
-        <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
-        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
-      </footer>
-
-    </div>
-  );
+            {/* Submit and Logout */}
+            <div className="actions">
+                <button onClick={handleSubmit}>Update Settings</button>
+                <button onClick={handleLogout}>Log Out</button>
+            </div>
+        </div>
+    );
 };
 
 export default AccountSettings;
