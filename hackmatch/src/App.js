@@ -10,8 +10,13 @@ import Home from "./pages/home";
 import Temp from "./pages/temp.js"
 import Chat from "./pages/messages.js"
 import AccountSettings from "./pages/AccountCreation/AccountSettings.js";
+// import Signup from "./pages/Signup"; // Your Signup component
+// import AccountCreation from "./pages/AccountCreation"; // Your AccountCreation component
+// import Home from "./pages/home";
+import Account from "./pages/AccountPage";
 import Launch from "./pages/Launch";
 
+import Stories from "./pages/stories";
 
 function App() {
   return (
@@ -27,10 +32,13 @@ function App() {
         <Route path="/Links" element={<Links />} />
         <Route path="/Bio" element={<Bio />} />
         <Route path="/Fun" element={<Fun />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/Account" element={<Account />} />
         <Route path ="/AccountSettings"element={<AccountSettings />} />
 
         <Route path="/home" element={<Home />} />
         <Route path="/AccountSettings" element={<AccountSettings />}/>
+        <Route path="/stories" element={<Stories />} />
         
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
