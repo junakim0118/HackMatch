@@ -234,9 +234,6 @@ const handleLogout = () => {
       const Schools = ["Western", "McMaster", "Laurier", "Queens"];
       const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
 
-
- 
-
   return (
     <div className="signup">
       <h1>Account Settings</h1>
