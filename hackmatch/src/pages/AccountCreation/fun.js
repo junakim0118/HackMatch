@@ -1,11 +1,12 @@
 import './fun.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -22,12 +23,12 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const db = getFirestore(app);
-
-const email = localStorage.getItem('email'); 
+const auth = getAuth();
 
 function Fun() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [email, setEmail] = useState(null); // State to store the email
 
     const [lang, setLang] = useState('');
     const [school, setSchool] = useState('');
@@ -47,6 +48,19 @@ function Fun() {
     const Schools = ["Western", "Mac", "Laurier", "Queens"];
     const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
     const YearOptions = [1, 2, 3, 4, "4+"];
+
+    // Fetch current user email on auth state change
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setEmail(user.email); // Set email when user is logged in
+            } else {
+                setEmail(null); // Reset if no user is logged in
+            }
+        });
+
+        return unsubscribe; // Clean up listener on unmount
+    }, [auth]);
 
     const handleLangChange = (e) => {
         const input = e.target.value;
@@ -114,7 +128,13 @@ function Fun() {
             setLoading(false);
             return;
         }
-    
+
+        if (!email) {
+            alert("Please sign in to continue.");
+            setLoading(false);
+            return;
+        }
+
         localStorage.setItem("day/night", dayNightMode);
         localStorage.setItem("front/back", frontBackMode);
         localStorage.setItem("year", year);
@@ -175,10 +195,10 @@ function Fun() {
                     Night-Hacker
                 </label>
             </div>
-            <br></br>
+            <br />
             {/* Frontend/Backend Selector */}
             <div className="radio-group">
-                <p>Whats your speciality?:</p>
+                <p>What's your speciality?:</p>
                 <label className="radio-label">
                     <input 
                         type="radio" 
@@ -200,9 +220,9 @@ function Fun() {
                     Backend
                 </label>
             </div>
-            <br></br>
+            <br />
             <div className="form-group">
-                <p>Whats Your Hackathon Fuel?</p>
+                <p>What's Your Hackathon Fuel?</p>
                 <select 
                     value={fuel} 
                     onChange={handleFuelChange} 
@@ -216,7 +236,7 @@ function Fun() {
                     ))}
                 </select>
             </div>
-            <br></br>
+            <br />
             {/* Year Dropdown */}
             <div className="form-group">
                 <p>What school year are you in?</p>
@@ -233,7 +253,7 @@ function Fun() {
                     ))}
                 </select>
             </div>
-            <br></br>
+            <br />
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-group">
                     <p>What's your favorite language to code in?</p>
@@ -258,7 +278,7 @@ function Fun() {
                         </ul>
                     )}
                 </div>
-                <br></br>
+                <br />
                 <div className="form-group">
                     <p>What school do you go to?</p>
                     <input

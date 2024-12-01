@@ -24,19 +24,29 @@ function Messages({ chatId, email1 }) {
   }, [chatId]);
 
   const sendMessage = async () => {
-    if (newMessage.trim() === "") return;
-
-    const chatDoc = doc(db, "chats", chatId);
-    await updateDoc(chatDoc, {
-      messages: arrayUnion({
-        text: newMessage,
-        sender: email1,
-        timestamp: new Date().toISOString(),
-      }),
-    });
-
-    setNewMessage("");
+    if (!newMessage || newMessage.trim() === "") return; // Ensure message is valid
+    if (!email1) {
+      console.error("Sender email is undefined.");
+      return;
+    }
+  
+    try {
+      const chatDoc = doc(db, "chats", chatId);
+  
+      await updateDoc(chatDoc, {
+        messages: arrayUnion({
+          text: newMessage.trim(), // Trim the message to remove extra spaces
+          sender: email1, // Ensure sender is defined
+          timestamp: new Date().toISOString(), // Generate a valid timestamp
+        }),
+      });
+  
+      setNewMessage(""); // Clear the input field after sending
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
+  
 
   return (
     <div className="chat">

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -19,15 +20,27 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
 const db = getFirestore(app);
-
-const email = localStorage.getItem('email'); 
+const auth = getAuth();
 
 function Bio() {
     const [bio, setBio] = useState('');
     const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState(null); // Email state for Firebase Authentication
     const navigate = useNavigate();
+
+    // Fetch current user email on auth state change
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setEmail(user.email); // Set email when user is logged in
+            } else {
+                setEmail(null); // Reset if no user is logged in
+            }
+        });
+
+        return unsubscribe; // Clean up listener on unmount
+    }, [auth]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -36,8 +49,12 @@ function Bio() {
             return;
         }
 
-        setLoading(true);
+        if (!email) {
+            alert("Please sign in to continue."); // Ensure email exists (user must be logged in)
+            return;
+        }
 
+        setLoading(true);
         localStorage.setItem("bio", bio);
 
         // Create the document in Firestore
@@ -53,7 +70,7 @@ function Bio() {
 
             navigate("/Fun");
         } catch (err) {
-            alert(err.message);
+            alert(`Error: ${err.message}`);
         }
 
         setLoading(false);

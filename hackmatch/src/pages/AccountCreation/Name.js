@@ -1,13 +1,12 @@
 import './Name.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 // Firebase initialization
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-
-import test from "../Signup";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -24,14 +23,27 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const db = getFirestore(app);
-
-const email = localStorage.getItem('email'); 
+const auth = getAuth();
 
 function Name() {
     const [FirstName, setFirstName] = useState('');
     const [LastName, setLastName] = useState('');
     const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState(null); // State for storing email
     const navigate = useNavigate();
+
+    // Use useEffect to listen for auth state changes
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setEmail(user.email);  // Update the email state
+            } else {
+                setEmail(null);  // Reset if no user is logged in
+            }
+        });
+
+        return unsubscribe; // Clean up the listener on unmount
+    }, [auth]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +51,11 @@ function Name() {
         // Validation for empty fields
         if (!FirstName.trim() || !LastName.trim()) {
             alert("Both First Name and Last Name are required!");
+            return;
+        }
+
+        if (!email) {
+            alert("Please sign in to continue.");
             return;
         }
 
