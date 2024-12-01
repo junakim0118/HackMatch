@@ -7,12 +7,16 @@ import Links from "./pages/AccountCreation/Links.js";
 import Bio from "./pages/AccountCreation/bio.js";
 import Fun from "./pages/AccountCreation/fun.js";
 import Home from "./pages/home";
+import Temp from "./pages/temp.js"
+import Chat from "./pages/messages.js"
 
 
 function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/Temp" element={<Temp />} />
+      <Route path="/Chat" element={<Chat />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
