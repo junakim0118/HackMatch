@@ -3,6 +3,11 @@ import Messages from "./messages";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import "./temp.css";
+import {Link} from 'react-router-dom';
+import { IoHome } from "react-icons/io5";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 
 // Function to get user data
 async function getData(collectionName, document, field) {
@@ -104,7 +109,7 @@ function Temp() {
     <div className="app">
       {!chatId ? (
         <div className="chat-list">
-          <h2>Your Chats</h2>
+          <h2>C H A T S</h2>
           {chats.length > 0 ? (
             chats.map((chat) => (
               <div
@@ -128,6 +133,11 @@ function Temp() {
       ) : (
         <Messages chatId={chatId} email1={recipient} />
       )}
+       <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/temp'><BiSolidMessageSquareDetail className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
     </div>
   );
 }
