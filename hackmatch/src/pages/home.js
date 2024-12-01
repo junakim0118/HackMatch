@@ -17,13 +17,6 @@ import { CiNoWaitingSign } from "react-icons/ci";
 import { MdLocalDrink } from "react-icons/md";
 import { FaCubes } from "react-icons/fa";
 
-import { IoSunny } from "react-icons/io5";
-import { IoMoon } from "react-icons/io5";
-
-import { IoLogoJavascript } from "react-icons/io5";
-import { FaJava } from "react-icons/fa";
-import { FaPython } from "react-icons/fa";
-
 import { SiRuby } from "react-icons/si";
 import { FaRust } from "react-icons/fa";
 import { SiKotlin } from "react-icons/si";
@@ -32,6 +25,10 @@ import { SiPhp } from "react-icons/si";
 import { BiLogoTypescript } from "react-icons/bi";
 import { DiScala } from "react-icons/di";
 import { SiHaskell } from "react-icons/si";
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const Home = () => {
   const [persons, setPersons] = useState([]);
@@ -139,6 +136,11 @@ const Home = () => {
     setIsUndoY(!isUndoY);
     await delay(400);
   };
+  const undoToggleCardN = async () => {
+    setIsUndoN(!isUndoN);
+    await delay(400);
+  };
+
   const undoToggleCardN = async () => {
     setIsUndoN(!isUndoN);
     await delay(400);
