@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 import "./AccountSettings.css";
+import { IoHome } from "react-icons/io5";
+import { FaPeopleArrows } from "react-icons/fa6";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 
 const AccountSettings = () => {
   // State for editable user info
@@ -131,12 +135,12 @@ const AccountSettings = () => {
           Log Out
         </button>
       </div>
-      <div className='menus'>
-        <div className='menu'><Link to='/home'>home</Link></div>
-        <div className='menu'>match</div>
-        <div className='menu'>message</div>
-        <div className='menu'><Link to='/AccountSettings'>profile</Link></div>
-      </div>
+      <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
+        <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
 
     </div>
   );
