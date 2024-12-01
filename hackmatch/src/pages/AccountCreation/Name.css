@@ -107,4 +107,50 @@
       font-size: 14px;
     }
   }
-  
+
+  .namecontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    background-color: #ffffff;
+    width: 80%;
+    flex-direction: column;
+    border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
+
+}
+
+.namebody {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.nameForm {
+  display: flex;
+  flex-direction: column;
+  margin: 5%;
+}
+
+.nameForm input {
+    margin-bottom: 4%; /* Adds space between inputs */
+}
+
+.nameForm button {
+    margin-top: 3%; /* Adds space between last input and button */
+}
+
+
+.text{
+  width: 75%;
+  text-align: center;
+  padding: 5%;
+}
+
+.nameline {
+width: 90%; /* Full width of the container */
+  border: none; /* Remove default border styling */
+  border-top: 2px solid #ccc; /* Add a custom line */
+}
