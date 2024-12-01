@@ -27,6 +27,11 @@ import { BiLogoTypescript } from "react-icons/bi";
 import { DiScala } from "react-icons/di";
 import { SiHaskell } from "react-icons/si";
 
+import pic1 from "../images/characters/character.jpg";
+import pic2 from "../images/characters/char2.jpg";
+import pic3 from "../images/characters/char3.png";
+import pic4 from "../images/characters/char4.png";
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -39,6 +44,13 @@ const Home = () => {
   const [isUndoY, setIsUndoY] = useState(false);
   const [isUndoN, setIsUndoN] = useState(false);
 
+  const imageMap = {
+    1: pic1,
+    2: pic2,
+    3: pic3,
+    4: pic4,
+  };
+
   const auth = getAuth(); // Get the authentication instance
   const currentUserEmail = auth.currentUser?.email;
 
@@ -50,6 +62,7 @@ const Home = () => {
         const usersList = usersSnapshot.docs.map(doc => {
           const data = doc.data();
           return {
+            character: data.character,
             email: doc.id,  // Use document ID as email
             caffeine: data.fuel,
             codingTime: data.daynight,
@@ -217,30 +230,25 @@ const Home = () => {
       return <img src={'./waterloo.png'} className='thingIcon'/>;
     }
   };
+
     return (
         <div className='home'>
           <header className="logos">
 <div className='hackwesternLogo'></div>
 <div className='hackmatchLogo'></div>
 </header>
-      {/* Stories Section */}
-      {/* <div className="stories">
-        {[1, 2, 3, 4, 5].map((id) => (
-          <div
-            key={id}
-            className="story"
-            onClick={() => alert(`You clicked on story ${id}`)}
-          >
-            {id}
-          </div>
-        ))}
-      </div> */}
-
-
       {persons.length > 0 && (
+
         <div className={`show`}>
-          <div className="bitmoji">Bitmoji Content</div>
-          <p className="name">{persons[personIndex].name}</p>
+
+          <img
+                src={imageMap[persons[personIndex]?.character]}
+                style={{ width: "100%", height: "auto", marginRight: "10px", borderRadius: "2em" }}
+              />
+
+
+
+          <p className="name">{persons[personIndex]?.name}</p>
           <div className="things">
             <div className='thing'>{caffeine(persons[personIndex])}</div>
             <div className='thing'>{codingTime(persons[personIndex])}</div>

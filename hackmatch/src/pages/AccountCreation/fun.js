@@ -40,9 +40,28 @@ function Fun() {
     { id: 4, name: "Character 4", img: pic4 },
   ];
 
-  const handleSelect = (item) => {
-    setSelectedItem(item);
+  const handleSelect = async (item) => {
+    setSelectedItem(item); // Update the state with the selected item
+  
+    if (!email) {
+      alert("Please sign in to select a character.");
+      return;
+    }
+  
+    try {
+      // Update Firestore with the selected character ID
+      await setDoc(
+        doc(db, "Users", email),
+        { selectedCharacter: item.id }, // Add or update the selectedCharacter field
+        { merge: true } // Merge with existing fields to avoid overwriting the document
+      );
+      console.log(`Character ${item.id} saved to Firestore.`);
+    } catch (error) {
+      console.error("Error saving character selection:", error);
+      alert("There was an issue saving your character selection. Please try again.");
+    }
   };
+  
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -260,6 +279,7 @@ function Fun() {
                 algorithm: algorithm,
                 song:song,
                 hobby:hobby,
+                character: selectedItem.id
             });
     
             navigate("/Home");
