@@ -1,100 +1,82 @@
 .container {
   display: flex;
-  justify-content: center; /* Centers items horizontally */
-  align-items: center; /* Centers items vertically */
-  flex-direction: column; /* Stack items vertically */
-  height: 40vh;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 40vh; /* Adjust height as needed */
   background-color: #ffffff;
   width: 80%;
+  flex-direction: column; /* Stack items vertically */
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
-  padding: 20px; 
+  padding: 20px; /* Adds spacing inside the container */
+  margin: auto; /* Centers the container within the page */
 }
 
-  
-  .page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #CCCCFF !important; /* Light purple background */
-  }
+.page {
+  display: flex;
+  justify-content: center; /* Centers container vertically */
+  align-items: center; /* Centers container horizontally */
+  width: 100%;
+  height: 100vh;
+  background-color: #CCCCFF !important; /* Light purple background */
+}
 
+form {
+  display: flex;
+  flex-direction: column; /* Stack input fields and button */
+  justify-content: center;
+  align-items: center; /* Centers form elements horizontally */
+  gap: 20px; /* Adds space between input fields and button */
+  width: 100%; /* Allows form to adapt to container width */
+}
 
-.email {
+.email{
   width: 75%;
-  height: 30%;
-  border-radius: 10px;
-  border: 1px solid #b08cec;
-  padding: 10px;
-  font-size: 16px;
-  margin-bottom: 1vh;
-  box-sizing: border-box;
-
+  height: 40px; /* Increased height for better appearance */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #b08cec; /* Purple border */
+  font-size: 16px; /* Text size */
+  box-sizing: border-box; /* Include padding and border in width */
+  text-align: center; /* Center text inside the input */
+  margin-top: 0.1vh;
 }
 
-.password{
+.password {
   width: 75%;
-  height: 30%;
-  border-radius: 10px;
-  border: 1px solid #b08cec;
-  padding: 10px;
-  font-size: 16px;
-
+  height: 40px; /* Increased height for better appearance */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #b08cec; /* Purple border */
+  font-size: 16px; /* Text size */
+  box-sizing: border-box; /* Include padding and border in width */
+  text-align: center; /* Center text inside the input */
+  margin-top: 0.1vh;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus {
   outline: none;
-  border-color: #b11cbc;
-  box-shadow: 0 0 5px rgba(177, 28, 188, 0.5);
+  border-color: #b11cbc; /* Purple border on focus */
+  box-shadow: 0 0 5px rgba(177, 28, 188, 0.5); /* Subtle glow on focus */
 }
 
-.log{
-  font-size: 30px;
-  font-weight: 600;
-  margin-top: 5%;
-  color:#b08cec;
-margin-bottom: 0.1rem; /* Reduce space below the heading */
-text-align: center;
+button {
+  background-color: #b08cec; /* Purple background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 50%; /* Rounded button */
+  padding: 12vh 30vh; /* Button padding */
+  font-size: 1rem; /* Font size for button text */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 8px rgba(175, 81, 226, 0.5); /* Subtle shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover animation */
+  margin-top: 0vh; /* Add space above the button */
+  align-self: center; /* Ensures button aligns with the form center */
 }
 
-.line {
-width: 90%; /* Full width of the container */
-border: none; /* Remove default border styling */
-border-top: 2px solid #ccc; /* Add a custom line */
-}
-
-.acc{
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 5%;
-  color:#b08cec;
-  margin-bottom: 0.1rem; /* Reduce space below the heading */
-  text-align: center;
-}
-
-.submit {
-  background-color: #b08cec;
-  color: white;
-  font-size: 16px;
-  border: 2px white;
-  margin-top: 20px; /* Adds space above the button */
-  font-weight: 550;
-  box-shadow: 0 0 8px 2px #af51e2;
-  padding: 10px 20px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover and click effects */
-  align-self: center; /* Centers the button inside the form */
-}
-
-.submit:hover {
+button:hover {
   background-color: #9b19a8; /* Darker purple on hover */
 }
 
-.submit:active {
-  transform: scale(0.95); /* Shrink slightly on click */
+button:active {
+  transform: scale(0.95); /* Slight shrink on click */
 }
-

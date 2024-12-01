@@ -1,7 +1,7 @@
 /* Make the image and container fill the screen */
 .story-container {
   position: relative; /* Position relative for the "X" button */
-  width: 100vw; /* Full width of the viewport */
+  width: 100%; /* Full width of the viewport */
   height: 100vh; /* Full height of the viewport */
   overflow: hidden; /* Prevent scrolling */
   background-color: black; /* Optional: Background for better contrast */

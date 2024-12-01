@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import './links.css';
 // Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -99,6 +99,7 @@ function Links() {
 
     return (
         <div className='signup'>
+                  <div className="container">
             <h1>Let's Get some important Links</h1>
             <form onSubmit={handleSubmit}>
                 <label>Enter the link to your LinkedIn</label>
@@ -131,6 +132,7 @@ function Links() {
                     {loading ? 'Creating Account...' : 'Continue'}
                 </button>
             </form>
+        </div>
         </div>
     );
 }

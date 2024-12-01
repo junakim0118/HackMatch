@@ -1,109 +1,84 @@
-/* General reset for margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Courier New", Courier, monospace;
+/* General Page Styling */
+.signup {
+  background-color: #CCCCFF; /* Light purple background */
+  height: 100vh; /* Full page height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto; /* Scrollable if content overflows */
+  text-align: center;
+  font-family: "Courier New", Courier, monospace; 
 
-  }
-  
-  /* Body styling */
-  .bio body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    margin: 0;
+}
 
-  }
-  
-  /* Container for the form */
-  .bio  {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+h1 {
+  font-size: 2rem;
+  color: #5b3ec7; /* Darker purple for the heading */
+  margin-bottom: 10px;
+}
 
-  }
-  
-  /* Title styling */
-  .bio h1 {
-    font-size: 24px;
-    color: #6a0dad; /* Purple */
-    margin-bottom: 20px;
-    font-weight: 600;
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Limit form width */
+  gap: 15px; /* Space between elements */
+}
 
-  }
-  
-  /* Input fields styling (now using textarea) */
-  .bio textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    outline: none;
-    min-height: 100px; /* Make the text area large enough to hold multiple lines */
-    resize: vertical; /* Allow vertical resizing but not horizontal */
+/* Textarea Styling */
+form textarea {
+  width: 100%; /* Full width */
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #b08cec;
+  border-radius: 10px;
+  box-sizing: border-box;
+  resize: none; /* Disable resizing */
+  outline: none;
+  height: 100px; /* Fixed height for the bio input */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  }
-  
-  .bio textarea:focus {
-    border-color: #6a0dad; /* Purple */
-  }
-  
-  /* Text length indicator */
-  .bio  {
-    margin-top: 5px;
-    font-size: 14px;
-  }
-  
-  .bio  span {
-    font-size: 12px;
-  }
-  
-  /* Button styling */
-  .bio button {
-    width: 100%;
-    padding: 12px;
-    background-color: #6a0dad; /* Purple */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .bio button:disabled {
-    background-color: #9b4dca; /* Lighter Purple */
-    cursor: not-allowed;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .bio  {
-      padding: 20px;
-    }
-  
-    .bio h1 {
-      font-size: 20px;
-    }
-  
-    .bio textarea {
-      font-size: 14px;
-    }
-  
-    .bio button {
-      font-size: 14px;
-    }
-  }
-  
+form textarea:focus {
+  border-color: #b11cbc;
+  box-shadow: 0 0 5px rgba(177, 28, 188, 0.5); /* Purple glow on focus */
+}
+
+/* Character Counter */
+form div > div {
+  text-align: right; /* Align character counter to the right */
+  margin-top: 5px; /* Space between textarea and counter */
+  color: #888; /* Neutral gray color */
+}
+
+/* Submit Button */
+form button {
+  background-color: #5b3ec7; /* Purple background */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Make button width consistent with inputs */
+}
+
+form button:hover {
+  background-color: #452e99; /* Darker purple on hover */
+}
+
+form button:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Ensure Consistent Spacing */
+form textarea::placeholder {
+  color: #aaa; /* Light gray placeholder text */
+  font-size: 0.9rem;
+}
