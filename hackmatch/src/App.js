@@ -16,6 +16,7 @@ import AccountSettings from "./pages/AccountCreation/AccountSettings.js";
 import Account from "./pages/AccountPage";
 import Launch from "./pages/Launch";
 
+import Stories from "./pages/stories";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
 
         <Route path="/home" element={<Home />} />
         <Route path="/AccountSettings" element={<AccountSettings />}/>
+        <Route path="/stories" element={<Stories />} />
         
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>
