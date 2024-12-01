@@ -35,6 +35,14 @@ function Fun() {
     const [year, setYear] = useState('');
     const [filteredLanguages, setFilteredLanguages] = useState([]);
     const [filteredSchools, setFilteredSchools] = useState([]);
+    const [midnightsnack, setMidnightsnack] = useState('');
+    const [algorithm, setAlgorithm] = useState('');
+    const [song, setSong] = useState('');
+    const [hobby, setHobby] = useState('');
+
+
+
+
 
     // States for both switches
     const [dayNightMode, setDayNightMode] = useState('day'); // 'day' or 'night'
@@ -98,6 +106,25 @@ function Fun() {
     const handleYearChange = (e) => {
         setYear(e.target.value);
     };
+    // Fun facts
+    const handleSnackChange = (e) => {
+        setMidnightsnack(e.target.value);
+    };
+
+    const handleAlgorithmChange = (e) => {
+        setAlgorithm(e.target.value);
+    };
+
+    const handleSongChange = (e) => {
+        setSong(e.target.value);
+    };
+
+    const handleHobbyChange = (e) => {
+        setHobby(e.target.value);
+    };
+    
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -108,6 +135,13 @@ function Fun() {
         localStorage.setItem("year", year);
         localStorage.setItem("lang", lang);
         localStorage.setItem("school", school);
+        localStorage.setItem("midnightsnack", midnightsnack);
+        localStorage.setItem("algorithm", algorithm);
+        localStorage.setItem("song", song);
+        localStorage.setItem("hobby", hobby);
+
+
+
 
         // Create the document in Firestore
         try {
@@ -121,7 +155,11 @@ function Fun() {
                 daynight: dayNightMode,
                 frontback: frontBackMode,
                 lang:lang,
-                school:school
+                school:school,
+                midnightsnack: midnightsnack,
+                algorithm: algorithm,
+                song:song,
+                hobby:hobby,
             });
 
             alert("Uploaded to fb, no next page");
@@ -137,7 +175,7 @@ function Fun() {
     return (
         <div className='signup'>
         <div className="form-container">
-            <h1>Who are you???</h1>
+            <h1>What type of Hacker are you?</h1>
 
             {/* Day/Night Selector */}
             <div className="radio-group">
@@ -186,6 +224,16 @@ function Fun() {
                         className="radio-input"
                     />
                     Backend
+                </label>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="fullstack" 
+                        checked={frontBackMode === 'fullstack'} 
+                        onChange={handleFrontBackChange} 
+                        className="radio-input"
+                    />
+                    FullStack
                 </label>
             </div>
 
@@ -254,6 +302,50 @@ function Fun() {
                         </ul>
                     )}
                 </div>
+                {/* fun facts */}
+                <h1>Fun facts about yourself</h1>
+
+            <div className="fun-facts">
+            <label>
+          Go-to Midnight Snack:
+          <input
+            type="text"
+            name="midnight snack"
+            value={midnightsnack.midnightsnack}
+            onChange={handleSnackChange}
+          />
+        </label>
+
+        <label>
+          What sorting algorithm are you?:
+          <input
+            type="text"
+            name="sorting algorithm"
+            value={algorithm.algorithm}
+            onChange={handleAlgorithmChange}
+          />
+        </label>
+
+        <label>
+          What's your favourite song?:
+          <input
+            type="text"
+            name="song"
+            value={song.song}
+            onChange={handleSongChange}
+          />
+        </label>
+
+        <label>
+          What's your coolest hobby?:
+          <input
+            type="text"
+            name="hobby"
+            value={hobby.hobby}
+            onChange={handleHobbyChange}
+          />
+        </label>
+            </div>
 
 
                <Link to="/AccountSettings">
