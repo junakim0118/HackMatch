@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Messages from "./messages";
 import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Function to get user data
 async function getData(collectionName, document, field) {
@@ -15,13 +16,24 @@ function Temp() {
   const [recipient, setRecipient] = useState("");
   const [chats, setChats] = useState([]);
   const [chatNames, setChatNames] = useState({});
-  const email = localStorage.getItem("email");
+  const [email, setEmail] = useState(""); // Email state from Firebase Auth
+  const auth = getAuth();
 
   useEffect(() => {
-    if (!email) {
-      alert("You must be logged in to view your chats.");
-      return;
-    }
+    // Check if user is logged in and set email
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setEmail(user.email); // Set email from Firebase Auth
+      } else {
+        alert("You must be logged in to view your chats.");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, [auth]);
+
+  useEffect(() => {
+    if (!email) return;
 
     // Fetch chats involving the current user's email
     const fetchChats = async () => {
