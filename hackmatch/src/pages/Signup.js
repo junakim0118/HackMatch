@@ -16,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "hackmatch-9fef5.firebasestorage.app",
   messagingSenderId: "520362196145",
   appId: "1:520362196145:web:338074b520500558317690",
-  measurementId: "G-SZV8RS906G"
+  measurementId: "G-SZV8RS906G",
 };
 
 
@@ -26,8 +26,8 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
 function Signup() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -36,13 +36,10 @@ function Signup() {
     e.preventDefault();
     setLoading(true);
 
-    localStorage.setItem('email',email);
-
     try {
-
       await createUserWithEmailAndPassword(auth, email, password);
 
-      navigate("/Name"); 
+      navigate("/Name");
     } catch (err) {
       alert(err.message);
     }
@@ -67,7 +64,7 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" disabled={loading}>
-          {loading ? 'Creating Account...' : 'Sign Up'}
+          {loading ? "Creating Account..." : "Sign Up"}
         </button>
       </form>
     </div>

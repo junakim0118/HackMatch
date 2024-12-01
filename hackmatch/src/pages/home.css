@@ -9,13 +9,13 @@
   }
 .logos{
     display: flex;
-    width: 400px;
-    height: 50px;
+    width: 25vh;
+    height: 5vh;
 }
 .hackwesternLogo{
-    background-image: url('../../public/image.png');
+    background-image: url('../../public/hackwesternlogoWhite.png');
     width: 15%;
-    height: 100%;
+    height: 90%;
     background-size: cover;
     background-position: center;
     margin-top: -5%;
@@ -23,7 +23,7 @@
 .hackmatchLogo{
     background-image: url('../../public/hackmatchlogo4.png');
     width:70%;
-    height: 100%;
+    height: 120%;
     background-size:cover;
     margin-top: -5%;
     background-position: center;
@@ -56,9 +56,9 @@
     margin-right:1%;
 }
 .person{
-   margin-top: 2%; 
+   margin-top: 5%; 
    width: 100%;
-   height:60vh;
+   height:65vh;
    border-radius: 5%;
    background-color: #703dbb;
    margin-left: auto;
@@ -67,6 +67,8 @@
    align-self: center;
    transition: transform 0.3s ease, opacity 0.3s ease;
    z-index:5;
+   box-shadow: 0 0 6px 2px #4a05b0;
+
 }
 .person.show {
     opacity: 1;
@@ -120,9 +122,10 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-right:1%;
+    margin-right:3%;
     padding: 5px;
-    margin-bottom: 4%;
+    margin-top: 2.5%;
+    border: 0.5px solid white;
 }
 .thing p{
     margin-top:-10%;
@@ -133,8 +136,9 @@
 }
 .name{
     color:aliceblue;
-    font-size: 20px;
-    margin-top: 1%;
+    font-size: 120%;
+    font-weight: 550;
+    margin-top: 2%;
     text-align: left;
     margin-left: 2%;
     z-index: 2;
@@ -150,84 +154,91 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-top: 1%;
+    margin-top: 5%;
     margin-bottom: 2%;
 
 }
 .choiceNo{
-    width: 40px;
-    height: 40px;
+    width: 15%;
+    height: 25%;
     border-radius: 50%;
     background-color: rgb(211, 0, 0);
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-right:5%;
+    margin-right:7%;
     text-align: center;
     padding: 5px;
+    box-shadow: 0 0 5px 2px rgb(151, 0, 0);
+
 }
 .choiceUndo{
-    width: 50px;
-    height: 50px;
+    width: 30%;
+    height: 20%;
     border-radius: 50%;
-    background-color: rgb(52, 21, 225);
+    background-color: rgb(141, 82, 217);
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-right:5%;
+    margin-right:7%;
     text-align: center;
     padding: 10px;
+    box-shadow: 0 0 5px 2px #703dbb;
+
 }
 .choiceYes{
-    width: 40px;
-    height: 40px;
+    width: 15%;
+    height: 25%;
     border-radius: 50%;
     background-color: rgb(71, 224, 15);
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin-right:5%;
+    margin-right:7%;
     text-align: center;
     padding: 5px;
+    box-shadow: 0 0 5px 2px rgb(34, 129, 0);
+
 }
 .choiceIcons{
     width: 30px;
     height: 30px;
     align-self: center;
-    color:aliceblue;
+    color:rgb(255, 255, 255);
 }
 .menus{
-    width:100%;
+    margin-bottom:0%;
+    left:0;
+    width: 100%;
+    height:60px;
+    margin-top: 10%;
     display: flex;
-    text-align: center;
+    background-color:#a07ce4;
     justify-content: center;
     align-items: center;
     bottom: 0;
     text-decoration: none;
+    box-shadow: 0 0 8px 2px #703dbb;
     
 }
 .menu{
-    width: 50px;
+    width: 60px;
     height: 50px;
-    border-radius: 50%;
-    background-color:#703dbb;
-    text-align: center;
     justify-content: center;
     align-items: center;
-    text-align: center;
     text-decoration: none;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding: 5px;
-    bottom: 0;
-}
-a{
-    text-decoration: none;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2%;
+    padding: 1.5vh;
+    display:flex;
+
 }
 .menuIcon{
     width: 40px;
     height: 40px;
     color: aliceblue;
+
 }
 
 

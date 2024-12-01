@@ -1,0 +1,103 @@
+/* Make the image and container fill the screen */
+.story-container {
+  position: relative; /* Position relative for the "X" button */
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  overflow: hidden; /* Prevent scrolling */
+  background-color: black; /* Optional: Background for better contrast */
+}
+
+.story-image {
+  width: 100%; /* Scale image to fit horizontally */
+  height: 100%; /* Scale image to fit vertically */
+  object-fit: cover; /* Ensures the image fills the container without distortion */
+}
+
+/* Style the exit button */
+.exit-button {
+  position: absolute; /* Position it at the top-right corner */
+  top: 1rem;
+  right: 0.70rem;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 50%; /* Make it circular */
+  width: 2.5rem; /* Set size */
+  height: 2.5rem; /* Set size */
+  font-size: 1.5rem; /* Larger font for visibility */
+  font-weight: bold;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  z-index: 10; /* Ensure it stays above the image */
+    padding: 1.5%
+}
+
+
+
+.header {
+  position: absolute;
+  width: 100%; /* Full width */
+  text-align: center; /* Center align text */
+  z-index: 5; /* Above the image */
+  /* background: transparent; */
+  margin-top: 1.5vh;
+  background: whilte;
+  width: 70%; 
+  left: 15%; /* Move it 50% from the left */
+  text-align: center; /* Center align the text */
+  border-radius: 2rem; /* Optional: Add rounded corners */
+}
+
+.header-title {
+  margin: 0;
+  font-size: 2rem; /* Larger font for the title */
+  color: rgb(0, 0, 0); /* White text for contrast */
+}
+
+.header-text {
+  margin: 0;
+  font-size: 1rem; /* Smaller font for the text */
+  color: rgb(0, 0, 0); /* White text for contrast */
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 1rem; /* Adjust font size */
+  line-height: 1.5; /* Improve readability */
+}
+
+
+/* Arrow buttons styling */
+.arrow {
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.left-arrow {
+  left: 1rem;
+}
+
+.right-arrow {
+  right: 1rem;
+}
+/* 
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+} */

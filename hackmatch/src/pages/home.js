@@ -154,7 +154,7 @@ const undoToggleCardN = async () => {
         <div className="bitmoji">Bitmoji Content</div>
 
       {/* Name Section */}
-      <p className="name">Name: {name}</p>
+      <p className="name">{name}</p>
       {/* Things Section */}
       <div className="things">
         <div className='thing'>{caffeine(person)}</div>
@@ -190,7 +190,6 @@ const undoToggleCardN = async () => {
       
       <footer className='menus'>
         <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
-        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
         <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
         <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
       </footer>
