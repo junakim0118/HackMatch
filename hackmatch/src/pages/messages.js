@@ -8,6 +8,7 @@ import {
   arrayUnion,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import {Link} from 'react-router-dom';
 
 function Messages({ chatId, email1 }) {
   const [messages, setMessages] = useState([]);
@@ -71,6 +72,7 @@ function Messages({ chatId, email1 }) {
         />
         <button className='send' onClick={sendMessage}>&gt;</button>
       </div>
+      
     </div>
   );
 }
