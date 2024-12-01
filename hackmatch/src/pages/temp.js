@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Messages from "./messages";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Function to get user data
 async function getData(collectionName, document, field) {
-  const docref = doc(db, collectionName, document);
-  const docsnap = await getDoc(docref);
-  return docsnap.exists() ? String(docsnap.data()[field]) : "Unknown User";
+  const docRef = doc(db, collectionName, document);
+  const docSnap = await getDoc(docRef);
+  return docSnap.exists() ? String(docSnap.data()[field]) : "Unknown User";
 }
 
 function Temp() {
   const [chatId, setChatId] = useState("");
   const [recipient, setRecipient] = useState("");
   const [chats, setChats] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [chatNames, setChatNames] = useState({});
+  const [matchNames, setMatchNames] = useState({});
   const [email, setEmail] = useState(""); // Email state from Firebase Auth
   const auth = getAuth();
 
@@ -35,7 +37,6 @@ function Temp() {
   useEffect(() => {
     if (!email) return;
 
-    // Fetch chats involving the current user's email
     const fetchChats = async () => {
       const chatsRef = collection(db, "chats");
       const querySnapshot = await getDocs(chatsRef);
@@ -55,12 +56,33 @@ function Temp() {
       setChats(chatList);
     };
 
-    fetchChats();
-  }, [email]);
+    const fetchMatches = async () => {
+      const userRef = doc(db, "Users", email);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const userMatches = userData.matches || [];
+        const existingChatEmails = chats.map((chat) =>
+          chat.id.split("-").find((participant) => participant !== email)
+        );
+
+        // Exclude matches already in chats
+        const filteredMatches = userMatches.filter(
+          (match) => !existingChatEmails.includes(match)
+        );
+
+        setMatches(filteredMatches); // Set filtered matches
+      }
+    };
+
+    fetchChats().then(fetchMatches); // Ensure chats are fetched before filtering matches
+  }, [email, chats]);
 
   useEffect(() => {
     const fetchNames = async () => {
       const names = {};
+      const matchNameMap = {};
 
       // Fetch names for all chats concurrently
       await Promise.all(
@@ -70,24 +92,39 @@ function Temp() {
 
           if (otherEmail) {
             try {
-              const firstname = await getData("Users", otherEmail, "firstName");
+              const firstName = await getData("Users", otherEmail, "firstName");
               const lastName = await getData("Users", otherEmail, "lastName");
-              names[chat.id] = `${firstname} ${lastName}`; // Store name using chat ID as key
+              names[chat.id] = `${firstName} ${lastName}`;
             } catch (error) {
               console.error("Error fetching user data:", error);
-              names[chat.id] = "Unknown User"; // Fallback if fetching data fails
+              names[chat.id] = "Unknown User";
             }
           }
         })
       );
 
+      // Fetch names for matches concurrently
+      await Promise.all(
+        matches.map(async (matchEmail) => {
+          try {
+            const firstName = await getData("Users", matchEmail, "firstName");
+            const lastName = await getData("Users", matchEmail, "lastName");
+            matchNameMap[matchEmail] = `${firstName} ${lastName}`;
+          } catch (error) {
+            console.error("Error fetching user data for match:", error);
+            matchNameMap[matchEmail] = "Unknown User";
+          }
+        })
+      );
+
       setChatNames(names);
+      setMatchNames(matchNameMap);
     };
 
-    if (chats.length > 0) {
+    if (chats.length > 0 || matches.length > 0) {
       fetchNames();
     }
-  }, [chats, email]);
+  }, [chats, matches, email]);
 
   const handleChatSelect = (chatId) => {
     setChatId(chatId);
@@ -98,6 +135,20 @@ function Temp() {
 
     // Set recipient to the other email
     setRecipient(otherEmail);
+  };
+
+  const handleMatchSelect = async (matchEmail) => {
+    const newChatId = [email, matchEmail].sort().join("-"); // Generate chat ID based on emails
+
+    // Check if the chat already exists, if not create a new chat
+    const chatRef = doc(db, "chats", newChatId);
+    const chatSnap = await getDoc(chatRef);
+
+    if (!chatSnap.exists()) {
+      await setDoc(chatRef, { messages: [] }); // Initialize chat document
+    }
+
+    handleChatSelect(newChatId); // Open the chat
   };
 
   return (
@@ -123,6 +174,27 @@ function Temp() {
             ))
           ) : (
             <p>No chats found.</p>
+          )}
+
+          <h2>Your Matches</h2>
+          {matches.length > 0 ? (
+            matches.map((matchEmail) => (
+              <div
+                key={matchEmail}
+                className="match-item"
+                onClick={() => handleMatchSelect(matchEmail)}
+                style={{
+                  cursor: "pointer",
+                  padding: "10px",
+                  border: "1px solid #ddd",
+                  margin: "5px 0",
+                }}
+              >
+                {matchNames[matchEmail] || "Loading..."}
+              </div>
+            ))
+          ) : (
+            <p>No matches found.</p>
           )}
         </div>
       ) : (

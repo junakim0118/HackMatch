@@ -53,7 +53,49 @@ function Fun() {
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell"
     ];
-    const Schools = ["Western", "Mac", "Laurier", "Queens"];
+    const Schools = [
+        "University of Toronto",
+        "University of British Columbia",
+        "McGill University",
+        "University of Alberta",
+        "Western University",
+        "Queen's University",
+        "University of Waterloo",
+        "Simon Fraser University",
+        "University of Ottawa",
+        "Dalhousie University",
+        "York University",
+        "University of Calgary",
+        "Carleton University",
+        "University of Manitoba",
+        "Université de Montréal",
+        "Université Laval",
+        "University of Saskatchewan",
+        "University of Victoria",
+        "McMaster University",
+        "Concordia University",
+        "University of Guelph",
+        "Wilfrid Laurier University",
+        "Brock University",
+        "Memorial University of Newfoundland",
+        "Université du Québec à Montréal (UQAM)",
+        "Ryerson University",
+        "Université de Sherbrooke",
+        "University of Regina",
+        "Lakehead University",
+        "Trent University",
+        "University of New Brunswick",
+        "University of Windsor",
+        "Mount Royal University",
+        "Acadia University",
+        "Laurentian University",
+        "Bishop's University",
+        "St. Francis Xavier University",
+        "University of Northern British Columbia",
+        "Nipissing University",
+        "Thompson Rivers University"
+      ];
+      
     const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
     const YearOptions = [1, 2, 3, 4, "4+"];
 
