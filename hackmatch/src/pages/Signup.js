@@ -55,11 +55,13 @@ function Signup() {
           type="text"
           placeholder="Email"
           value={email}
+          className = "email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
+          className = "password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

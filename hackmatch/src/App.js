@@ -18,6 +18,9 @@ import Launch from "./pages/Launch";
 
 import Stories from "./pages/stories";
 
+import Posts from "./pages/Posts";
+
+
 function App() {
   return (
     <Router>
@@ -37,8 +40,9 @@ function App() {
         <Route path ="/AccountSettings"element={<AccountSettings />} />
 
         <Route path="/home" element={<Home />} />
-        <Route path="/AccountSettings" element={<AccountSettings />}/>
+        {/* <Route path="/AccountSettings" element={<AccountSettings />}/> */}
         <Route path="/stories" element={<Stories />} />
+        <Route path="/Posts" element={<Posts />} />
         
         {/* <Route path="/accountCreation" element={<AccountCreation />} /> */}
       </Routes>

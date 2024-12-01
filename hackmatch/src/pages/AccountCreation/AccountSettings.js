@@ -10,6 +10,11 @@ import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
+import pic1 from "../../images/characters/character.jpg";
+import pic2 from "../../images/characters/char2.jpg";
+import pic3 from "../../images/characters/char3.png";
+import pic4 from "../../images/characters/char4.png";
+
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -32,6 +37,28 @@ const email = localStorage.getItem("email");
 
 
 const AccountSettings = () => {
+
+        // const [selectedOption, setSelectedOption] = useState(""); // Dropdown state
+const [selectedItem, setSelectedItem] = useState(null);
+          const items = [
+    { id: 1, name: "Character 1", img: pic1 },
+    { id: 2, name: "Character 2", img: pic2 },
+    { id: 3, name: "Character 3", img: pic3 },
+    { id: 4, name: "Character 4", img: pic4 },
+  ];
+
+  const handleSelect = (item) => {
+    setSelectedItem(item);
+  };
+
+
+  const [isOpen, setIsOpen] = useState(false);
+   const toggleDropdown = () => {
+    setIsOpen((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  
+
     const [LinkedIn, setLinkedIn] = useState("");
     const [Github, setGithub] = useState("");
     const [Portfolio, setPortfolio] = useState("");
@@ -50,13 +77,13 @@ const AccountSettings = () => {
     const [school, setSchool] = useState("");
     const [email, setEmail] = useState("");
 
-    // Handles profile picture upload
-const handleProfilePicUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        setProfilePic(URL.createObjectURL(file)); // Previews uploaded image
-    }
-};
+//     // Handles profile picture upload
+// const handleProfilePicUpload = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//         setProfilePic(URL.createObjectURL(file)); // Previews uploaded image
+//     }
+// };
 
 // Handles name input
 
@@ -217,19 +244,110 @@ const handleLogout = () => {
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
   <label htmlFor="profilePic">
-    <img
+    {/* <img
       src={profilePic || "https://via.placeholder.com/150"}
       alt="Profile"
       className="profile-pic"
-    />
+    /> */}
+    <div style={{ width: "200px", margin: "0 auto", position: "relative" }}>
+      {/* Dropdown button */}
+      <div
+        onClick={toggleDropdown}
+        style={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {selectedItem ? (
+            <>
+              <img
+                src={selectedItem.img}
+                alt={selectedItem.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+              {selectedItem.name}
+            </>
+          ) : (
+            "Select a character:"
+          )}
+        </div>
+        <span>{isOpen ? "▲" : "▼"}</span>
+      </div>
+
+      {/* Dropdown menu */}
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            backgroundColor: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            marginTop: "5px",
+            zIndex: 1000,
+          }}
+        >
+          {items.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "10px",
+                cursor: "pointer",
+                borderBottom: "1px solid #eee",
+              }}
+              onClick={() => handleSelect(item)}
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+              {item.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   </label>
-  <input
+  {/* <input
     type="file"
     id="profilePic"
     accept="image/*"
     onChange={handleProfilePicUpload}
     hidden
-  />
+  /> */}
+  {/* <select
+            id="dropdown"
+            className="dropdown"
+            value={selectedOption}
+            onChange={
+                (e) => setSelectedOption(e.target.value)
+                // handleProfilePicUpload;
+                
+            }
+          >
+            <option value="" disabled>Select an option</option>
+            <option value="1">
+                <img src={pic1} alt="Profile" className="profile-pic" />
+            </option>
+            <option value="2">
+                <img src={pic2} alt="Profile" className="profile-pic" />
+            </option>
+            <option value="3">
+                <img src={pic3} alt="Profile" className="profile-pic" />
+            </option>
+             <option value="4">
+                <img src={pic4} alt="Profile" className="profile-pic" />
+            </option>
+          </select> */}
   <div className="profile-info">
     <label>
       Name:
