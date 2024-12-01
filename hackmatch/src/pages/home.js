@@ -9,7 +9,11 @@ import { FaTimes } from "react-icons/fa";
 import { FaUndoAlt } from "react-icons/fa";
 
 import { PiCoffeeBeanFill } from "react-icons/pi";
+import { TbTeapot } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
+import { CiNoWaitingSign } from "react-icons/ci";
+import { MdLocalDrink } from "react-icons/md";
+import { FaCubes } from "react-icons/fa";
 
 import { IoSunny } from "react-icons/io5";
 import { IoMoon } from "react-icons/io5";
@@ -17,9 +21,15 @@ import { IoMoon } from "react-icons/io5";
 import { IoLogoJavascript } from "react-icons/io5";
 import { FaJava } from "react-icons/fa";
 import { FaPython } from "react-icons/fa";
-import { TbHtml } from "react-icons/tb";
-import { SiCsswizardry } from "react-icons/si";
+
+import { SiRuby } from "react-icons/si";
+import { FaRust } from "react-icons/fa";
+import { SiKotlin } from "react-icons/si";
+import { FaSwift } from "react-icons/fa";
+import { SiPhp } from "react-icons/si";
 import { BiLogoTypescript } from "react-icons/bi";
+import { DiScala } from "react-icons/di";
+import { SiHaskell } from "react-icons/si";
 
 const Home = () => {
 
@@ -27,10 +37,10 @@ const Home = () => {
   const [personIndex, setPersonIndex] = useState(0);
 
   const persons = [
-    { name: 'Juna Kim', caffeine: 'coffee', codingTime: 'night', language: 'js', school: 'Western' }, //do status of no, yes, matched
-    { name: 'Millicent Song', caffeine: 'energy drink', codingTime: 'day', language: 'python', school: 'Mac' },
-    { name: 'Nathan Wan', caffeine: 'coffee', codingTime: 'night', language: 'java', school: 'Laurier' },
-    { name: 'Jenusan Yogarajah', caffeine: 'coffee', codingTime: 'night', language: 'html', school: 'Queens' },
+    { name: 'Juna Kim', caffeine: 'Coffee', codingTime: 'Night', language: 'JavaScript', school: 'Western' }, //do status of no, yes, matched
+    { name: 'Millicent Song', caffeine: 'Energy drink', codingTime: 'Day', language: 'Python', school: 'Mac' },
+    { name: 'Nathan Wan', caffeine: 'Coffee', codingTime: 'Night', language: 'Java', school: 'Laurier' },
+    { name: 'Jenusan Yogarajah', caffeine: 'No caffeine', codingTime: 'Night', language: 'TypeScript', school: 'Queens' },
     // Add more persons as needed
   ];
 
@@ -88,30 +98,62 @@ const undoToggleCardN = async () => {
   };
 
   function caffeine(person){
-    if(person.caffeine === 'coffee'){
+    if(person.caffeine === 'Coffee'){
       return <PiCoffeeBeanFill className='thingIcon'/>;
-    } else if (person.caffeine ==='energy drink'){
+    } else if (person.caffeine ==='Brewed tea'){
+      return <TbTeapot className='thingIcon'/>;
+    } else if (person.caffeine ==='Energy drink'){
       return <SlEnergy className='thingIcon'/>;
+    }else if (person.caffeine ==='No caffeine'){
+      return <CiNoWaitingSign className='thingIcon'/>;
+    }else if (person.caffeine ==='Matcha'){
+      return <MdLocalDrink className='thingIcon'/>;
+    }else if (person.caffeine ==='Sugar'){
+      return <FaCubes className='thingIcon'/>;
     }
   };
 
   function codingTime(person){
-    if(person.codingTime === 'day'){
+    if(person.codingTime === 'Day'){
       return <IoSunny className='thingIcon'/>;
-    } else if (person.codingTime ==='night'){
+    } else if (person.codingTime ==='Night'){
       return <IoMoon className='thingIcon'/>;
     }
   };
 
   function language(person){
-    if(person.language === 'js'){
+    if(person.language === 'JavaScript'){
       return <IoLogoJavascript className='thingIcon'/>;
-    } else if (person.language ==='python'){
+    } else if (person.language ==='Python'){
       return <FaPython className='thingIcon'/>;
-    } else if (person.language ==='java'){
+    } else if (person.language ==='Java'){
       return <FaJava className='thingIcon'/>; 
-    }else if (person.language ==='html'){
-      return <TbHtml className='thingIcon'/>; 
+    }else if (person.language ==='C#'){
+      return <div className='thingIcon'>C#</div>; 
+    }else if (person.language ==='C++'){
+      return <div className='thingIcon'>C++</div>; 
+    }else if (person.language ==='Ruby'){
+      return <SiRuby className='thingIcon'/>;
+    }else if (person.language ==='Go'){
+      return <div className='thingIcon'>Go</div>; 
+    }else if (person.language ==='Rust'){
+      return <FaRust className='thingIcon'/>;
+    }else if (person.language ==='Kotlin'){
+      return <SiKotlin className='thingIcon'/>;
+    }else if (person.language ==='Swift'){
+      return <FaSwift className='thingIcon'/>;
+    }else if (person.language ==='PHP'){
+      return <SiPhp className='thingIcon'/>; 
+    }else if (person.language ==='TypeScript'){
+      return <BiLogoTypescript className='thingIcon'/>; 
+    }else if (person.language ==='Scala'){
+      return <DiScala className='thingIcon'/>; 
+    }else if (person.language ==='Perl'){
+      return <div className='thingIcon'>Perl</div>; 
+    }else if (person.language ==='R'){
+      return <div className='thingIcon'>R</div>; 
+    }else if (person.language ==='Haskell'){
+      return <SiHaskell className='thingIcon'/>; 
     }
   };
   function school(person){
