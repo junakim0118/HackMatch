@@ -9,9 +9,7 @@ import { PiCoffeeBeanFill } from "react-icons/pi";
 import { TbTeapot } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
 
-import { IoSunny, IoMoon, IoLogoJavascript } from "react-icons/io5";
-import { FaJava, FaPython } from "react-icons/fa";
-import { TbHtml } from "react-icons/tb";
+
 import { db } from "../firebase.js";
 import { getDocs, collection, doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
@@ -141,6 +139,10 @@ const Home = () => {
     setIsUndoY(!isUndoY);
     await delay(400);
   };
+  const undoToggleCardN = async () => {
+    setIsUndoN(!isUndoN);
+    await delay(400);
+  };
 
   function caffeine(person){
     if(person.caffeine === 'Coffee'){
@@ -210,6 +212,10 @@ const Home = () => {
       return <img src={'./laurier.png'} className='thingIcon'/>;
     }else if (person.school ==='Queens'){
       return <img src={'./queens.png'} className='thingIcon'/>;
+    }else if (person.school ==='UofT'){
+      return <img src={'./uoft.png'} className='thingIcon'/>;
+    }else if (person.school ==='Waterloo'){
+      return <img src={'./waterloo.png'} className='thingIcon'/>;
     }
   };
     return (
