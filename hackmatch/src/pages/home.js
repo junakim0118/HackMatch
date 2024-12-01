@@ -161,7 +161,7 @@ const Home = () => {
       return <PiCoffeeBeanFill className='thingIcon'/>;
     } else if (person.caffeine ==='Brewed tea'){
       return <TbTeapot className='thingIcon'/>;
-    } else if (person.caffeine ==='Energy drink'){
+    } else if (person.caffeine ==='Energy Drinks'){
       return <SlEnergy className='thingIcon'/>;
     }else if (person.caffeine ==='No caffeine'){
       return <CiNoWaitingSign className='thingIcon'/>;
@@ -216,17 +216,17 @@ const Home = () => {
     }
   };
   function school(person){
-    if(person.school === 'Western'){
+    if(person.school == 'Western University'){
       return <img src={'./western.png'} className='thingIcon'/>;
-    } else if (person.school ==='Mac'){
+    } else if (person.school =='McMaster University'){
       return <img src={'./mac.png'} className='thingIcon'/>;
-    } else if (person.school ==='Laurier'){
+    } else if (person.school =='Laurier'){
       return <img src={'./laurier.png'} className='thingIcon'/>;
-    }else if (person.school ==='Queens'){
+    }else if (person.school ==`Queen's University`){
       return <img src={'./queens.png'} className='thingIcon'/>;
-    }else if (person.school ==='UofT'){
+    }else if (person.school =='University of Toronto'){
       return <img src={'./uoft.png'} className='thingIcon'/>;
-    }else if (person.school ==='Waterloo'){
+    }else if (person.school =='University of Waterloo'){
       return <img src={'./waterloo.png'} className='thingIcon'/>;
     }
   };
@@ -252,7 +252,7 @@ const Home = () => {
             <div className='thing'>{caffeine(persons[personIndex])}</div>
             <div className='thing'>{codingTime(persons[personIndex])}</div>
             <div className='thing'>{language(persons[personIndex])}</div>
-            <div className='thing'><p>{persons[personIndex].school}</p></div>
+            <div className='thing'>{school(persons[personIndex])}</div>
 
           </div>
         </div>
