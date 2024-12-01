@@ -4,6 +4,7 @@
   align-items: flex-start; /* Align items to the start of the page */
   min-height: 100vh;
   background-color: #f8f9fa;
+  align-items: center; /* Center align items horizontally */
 }
 .header {
   display: flex;
@@ -17,18 +18,24 @@
   text-align: center;
   font-size: 1.5rem;
   width: 100%;
-}
+
+  align-items: center; /* Center align items horizontally */
+  justify-content: center; /* Center align items vertically */
+
+
+ }
 
 .top {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: 90%;
 
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-top: 2vh;
+
 }
 
 .icon {
@@ -63,12 +70,21 @@
 }
 
 .bio {
-  font-size: 1rem;
-  text-align: left;
-  /* margin-right: 10%; */
-  /* margin: 2%; */
-  
+  display: flex; /* Make the container a flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center align items horizontally */
+  justify-content: center; /* Center align items vertically */
+  font-size: 1rem; /* Keep the font size for the text */
+  text-align: center; /* Center align text inside */
+  margin: auto; /* Center the entire bio within its parent */
+  width: 80%; /* Optional: control the width of the bio container */
+  padding: 1rem; /* Add some padding inside the container */
+  border: 1px solid #ccc; /* Optional: Add a subtle border for the bio section */
+  border-radius: 8px; /* Optional: Round the corners for aesthetics */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a modern look */
+  background-color: #fff; /* Optional: Add a background color */
 }
+
 
 .bio-header {
   font-size: 1.25rem;

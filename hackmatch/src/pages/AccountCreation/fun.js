@@ -53,7 +53,7 @@ function Fun() {
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell"
     ];
-    // const Schools = ["Western", "Mac", "Laurier", "Queens"];
+    const Schools = ["Western", "Mac", "Laurier", "Queens"];
     const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
     const YearOptions = [1, 2, 3, 4, "4+"];
 
