@@ -1,4 +1,3 @@
-
 import { IoHome } from "react-icons/io5";
 import { FaPeopleArrows } from "react-icons/fa6";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
@@ -9,16 +8,14 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { IoHome } from "react-icons/io5";
-import { FaPeopleArrows } from "react-icons/fa6";
-import { BiSolidMessageSquareDetail } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
     authDomain: "hackmatch-9fef5.firebaseapp.com",
     projectId: "hackmatch-9fef5",
-    storageBucket: "hackmatch-9fef5.firebasestorage.app",
+    storageBucket: "hackmatch-9fef5",
     messagingSenderId: "520362196145",
     appId: "1:520362196145:web:338074b520500558317690",
 };
@@ -30,9 +27,7 @@ if (!getApps().length) {
 }
 
 const db = getFirestore(app);
-
-const email = localStorage.getItem("email");
-
+const auth = getAuth(app);
 
 const AccountSettings = () => {
     const [LinkedIn, setLinkedIn] = useState("");
@@ -53,117 +48,141 @@ const AccountSettings = () => {
     const [school, setSchool] = useState("");
     const [email, setEmail] = useState("");
 
-    // Handles profile picture upload
-const handleProfilePicUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        setProfilePic(URL.createObjectURL(file)); // Previews uploaded image
-    }
+    const navigate = useNavigate();
+
+    // Handles LinkedIn input
+const handleLinkedInChange = (e) => {
+  setLinkedIn(e.target.value);
 };
 
-// Handles name input
-
-const handleSchoolChange = (e) =>{
-    setSchool(e.target.value);
-};
-const handleNameChange = (e) => {
-    setName(e.target.value);
+// Handles Github input
+const handleGithubChange = (e) => {
+  setGithub(e.target.value);
 };
 
-// Handles bio input
-const handleBioChange = (e) => {
-    setBio(e.target.value);
-};
-
-// Handles caffeine selection
-const handleCaffeineChange = (e) => {
-    setCaffeine(e.target.value);
-};
-
-// Handles day/night selection
-const handleDayorNightChange = (e) => {
-    setDayorNight(e.target.value);
-};
-
-// Handles focus selection
-const handleFocusChange = (e) => {
-    setFocus(e.target.value);
+// Handles Portfolio input
+const handlePortfolioChange = (e) => {
+  setPortfolio(e.target.value);
 };
 
 // Handles year selection
 const handleYearChange = (e) => {
-    setYear(e.target.value);
+  setYear(e.target.value);
 };
 
-// Handles language selection
-const handleLanguageChange = (e) => {
-    setLanguage(e.target.value);
+// Handles day/night selection
+const handleDayorNightChange = (e) => {
+  setDayorNight(e.target.value);
+};
+
+// Handles focus selection
+const handleFocusChange = (e) => {
+  setFocus(e.target.value);
 };
 
 // Handles midnight snack input
 const handleSnackChange = (e) => {
-    setMidnightsnack(e.target.value);
+  setMidnightsnack(e.target.value);
 };
 
 // Handles algorithm input
 const handleAlgorithmChange = (e) => {
-    setAlgorithm(e.target.value);
+  setAlgorithm(e.target.value);
 };
 
 // Handles song input
 const handleSongChange = (e) => {
-    setSong(e.target.value);
+  setSong(e.target.value);
 };
 
 // Handles hobby input
 const handleHobbyChange = (e) => {
-    setHobby(e.target.value);
+  setHobby(e.target.value);
 };
 
-// Handles logout functionality
-const handleLogout = () => {
-    alert("You have been logged out.");
-    navigate("/login"); // Redirect to login page (replace with your route)
+// Handles favourite programming language selection
+const handleLanguageChange = (e) => {
+  setLanguage(e.target.value);
 };
 
-    const navigate = useNavigate();
+// Handles bio input
+const handleBioChange = (e) => {
+  setBio(e.target.value);
+};
 
-    // Fetch user data when the component mounts
+// Handles caffeine selection
+const handleCaffeineChange = (e) => {
+  setCaffeine(e.target.value);
+};
+
+// Handles name input
+const handleNameChange = (e) => {
+  setName(e.target.value);
+};
+
+// Handles school selection
+const handleSchoolChange = (e) => {
+  setSchool(e.target.value);
+};
+
+
+    // Handles profile picture upload
+    const handleProfilePicUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfilePic(URL.createObjectURL(file)); // Previews uploaded image
+        }
+    };
+
+    // Fetch authenticated user's email on component mount
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const docRef = doc(db, "Users", email);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    setName(data.firstName + " " + data.lastName);
-                    setLinkedIn(data.LinkedIn || "");
-                    setGithub(data.github || "");
-                    setPortfolio(data.portfolio || "");
-                    setEmail(data.email || "");
-                    setBio(data.bio || "");
-                    setYear(data.year || "");
-                    setDayorNight(data.dayornight || "");
-                    setFocus(data.focus || "");
-                    setMidnightsnack(data.midnightsnack || "");
-                    setAlgorithm(data.algorithm || "");
-                    setSong(data.song || "");
-                    setHobby(data.hobby || "");
-                    setLanguage(data.favouriteLanguage || "");
-                    setCaffeine(data.caffeine || "");
-                    setSchool(data.School || "");
-                    
-                } else {
-                    console.log("No such document!");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user && user.email) {
+                setEmail(user.email); // Set the authenticated user's email
+            } else {
+                console.log("No authenticated user found.");
+                navigate("/login"); // Redirect to login if no user
             }
-        };
+        });
+        return () => unsubscribe(); // Clean up the listener
+    }, [auth, navigate]);
 
-        fetchUserData();
-    }, []);
+    // Fetch user data from Firestore
+    useEffect(() => {
+        if (email) {
+            const fetchUserData = async () => {
+                try {
+                    const docRef = doc(db, "Users", email);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        setName(data.firstName + " " + data.lastName);
+                        setLinkedIn(data.LinkedIn || "");
+                        setGithub(data.github || "");
+                        setPortfolio(data.portfolio || "");
+                        setBio(data.bio || "");
+                        setYear(data.year || "");
+                        setDayorNight(data.dayornight || "");
+                        setFocus(data.focus || "");
+                        setMidnightsnack(data.midnightsnack || "");
+                        setAlgorithm(data.algorithm || "");
+                        setSong(data.song || "");
+                        setHobby(data.hobby || "");
+                        setLanguage(data.favouriteLanguage || "");
+                        setCaffeine(data.caffeine || "");
+                        setSchool(data.School || "");
+                    } else {
+                        console.log("No such document!");
+                    }
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                }
+            };
+
+            fetchUserData();
+        }
+    }, [email]);
 
     const handleFirestoreUpdate = async () => {
         try {
@@ -185,7 +204,6 @@ const handleLogout = () => {
                 hobby,
                 favouriteLanguage,
                 caffeine,
-                
             });
 
             alert("Profile updated successfully!");
@@ -201,21 +219,29 @@ const handleLogout = () => {
         handleFirestoreUpdate();
     };
 
+    const handleLogout = () => {
+        auth.signOut()
+            .then(() => {
+                alert("You have been logged out.");
+                navigate("/login"); // Redirect to login page
+            })
+            .catch((error) => {
+                console.error("Logout error:", error);
+                alert("Error logging out.");
+            });
+    };
 
-    //programming languages array
+    // Programming languages, schools, and caffeine options
     const programmingLanguages = [
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell",
-      ];
-      const Schools = ["Western", "McMaster", "Laurier", "Queens"];
-      const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
+    ];
+    const Schools = ["Western", "McMaster", "Laurier", "Queens"];
+    const Caffeine = ["Coffee", "Brewed tea", "Energy Drinks", "No caffeine", "Matcha", "Sugar"];
 
-
- 
-
-  return (
-    <div className="signup">
-      <h1>Account Settings</h1>
+    return (
+        <div className="signup">
+            <h1>Account Settings</h1>
 
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
