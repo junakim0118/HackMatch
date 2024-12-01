@@ -1,156 +1,81 @@
-/* General reset for margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body styling */
-  .nameInput body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    margin: 0;
-  }
-  
-  /* Container for the form */
-  .nameInput {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  /* Title styling */
-  .nameInput h1 {
-    font-size: 24px;
-    color: #6a0dad; /* Purple */
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  
-  /* Subtitle styling */
-  .nameInput p {
-    font-size: 16px;
-    color: #6a0dad;
-    margin-bottom: 20px;
-    font-weight: 400;
-  }
-
-  .nameInput label {
-    font-size: 16px;
-    color: #6a0dad;
-    margin-bottom: 20px;
-    font-weight: 400;
-  }
-  
-  /* Input fields styling */
-  .nameInput input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    outline: none;
-  }
-  
-  .nameInput input:focus {
-    border-color: #6a0dad; /* Purple */
-  }
-  
-  /* Button styling */
-  .nameInput button {
-    width: 100%;
-    padding: 12px;
-    background-color: #6a0dad; /* Purple */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .nameInput button:disabled {
-    background-color: #9b4dca; /* Lighter Purple */
-    cursor: not-allowed;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    .nameInput  {
-      padding: 20px;
-    }
-  
-    .nameInput h1 {
-      font-size: 20px;
-    }
-  
-    .nameInput p {
-      font-size: 14px;
-    }
-  
-    .nameInput input {
-      font-size: 14px;
-    }
-  
-    .nameInput button {
-      font-size: 14px;
-    }
-  }
-
-  .namecontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40vh;
-    background-color: #ffffff;
-    width: 80%;
-    flex-direction: column;
-    border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(115, 33, 210, 0.855);
-
-}
-
-.namebody {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.nameForm {
+/* General Page Styling */
+.signup {
+  font-family: "Arial", sans-serif;
+  background-color: #CCCCFF; /* Light purple background */
+  height: 100vh; /* Full page height */
   display: flex;
   flex-direction: column;
-  margin: 5%;
-}
-
-.nameForm input {
-    margin-bottom: 4%; /* Adds space between inputs */
-}
-
-.nameForm button {
-    margin-top: 3%; /* Adds space between last input and button */
-}
-
-
-.text{
-  width: 75%;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto; /* Scrollable if content overflows */
   text-align: center;
-  padding: 5%;
 }
 
-.nameline {
-width: 90%; /* Full width of the container */
-  border: none; /* Remove default border styling */
-  border-top: 2px solid #ccc; /* Add a custom line */
+h1 {
+  font-size: 2rem;
+  color: #5b3ec7; /* Darker purple for the heading */
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 550;
+  color:#b08cec;
+  margin: 5px 0 15px; /* Space between the paragraphs */
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Limit form width */
+  gap: 15px; /* Space between inputs and button */
+}
+
+/* Input Fields */
+form input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #b08cec;
+  border-radius: 10px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus {
+  border-color: #b11cbc;
+  box-shadow: 0 0 5px rgba(177, 28, 188, 0.5); /* Purple glow on focus */
+}
+
+/* Submit Button */
+form button {
+  background-color: #452e99; /* Purple background */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%; /* Make button width consistent with inputs */
+}
+
+form button:hover {
+  background-color: #452e99; /* Darker purple on hover */
+}
+
+form button:active {
+  transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Ensure Consistent Spacing */
+form input::placeholder {
+  color: #aaa; /* Light gray placeholders */
+  font-size: 0.9rem;
 }

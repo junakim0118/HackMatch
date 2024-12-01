@@ -79,13 +79,12 @@ function Name() {
     };
 
     return (
-        <div className = 'namebody'>
-        <div className='namecontainer'>
-            <h1>Account Created!</h1>
-                  <hr className = "nameline"/>
-            <p className="text">Now we need some basic hacker info from you!</p>
-            <p>Let's Start With Your Name:</p>
-            <form onSubmit={handleSubmit} className="nameForm">
+        <div className='signup'>
+            <div className='container'>
+            <h1>Account Created</h1>
+            <p>Now we need some basic hacker info from you!</p>
+            <p>Let's Start With Your Name</p>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="First Name"

@@ -86,6 +86,7 @@ function Bio() {
 
     return (
         <div className='signup'>
+            <div className='container'>
             <h1>Tell us about yourself</h1>
             <form onSubmit={handleSubmit}>
                 <div style={{ marginBottom: '10px' }}>
@@ -107,6 +108,7 @@ function Bio() {
                     {loading ? 'Creating Account...' : 'Continue'}
                 </button>
             </form>
+        </div>
         </div>
     );
 }
