@@ -253,7 +253,25 @@ const handleHobbyChange = (e) => {
     return (
         <div className="signup">
             <h1>A C C O U N T S E T T I N G S</h1>
-
+  <div className="profile-info">
+    <label>
+      Name:
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleNameChange}
+      />
+    </label>
+    <label>
+      Bio:
+      <textarea
+        name="bio"
+        value={bio}
+        onChange={handleBioChange}
+      />
+    </label>
+  </div>
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
   <label htmlFor="profilePic">
@@ -262,7 +280,7 @@ const handleHobbyChange = (e) => {
       alt="Profile"
       className="profile-pic"
     /> */}
-    <div style={{ width: "200px", margin: "0 auto", position: "relative" }}>
+    <div className="dropdown">
       {/* Dropdown button */}
       <div
         onClick={toggleDropdown}
@@ -274,6 +292,7 @@ const handleHobbyChange = (e) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -282,7 +301,7 @@ const handleHobbyChange = (e) => {
               <img
                 src={selectedItem.img}
                 alt={selectedItem.name}
-                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+                style={{ width: "30px", height: "30px", marginRight: "10px", borderRadius: "50%" }}
               />
               {selectedItem.name}
             </>
@@ -296,15 +315,15 @@ const handleHobbyChange = (e) => {
       {/* Dropdown menu */}
       {isOpen && (
         <div
-          style={{
-            position: "absolute",
-            width: "100%",
-            backgroundColor: "#fff",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            marginTop: "5px",
-            zIndex: 1000,
-          }}
+              style={{
+      position: "absolute",
+      width: "100%",
+      backgroundColor: "#ffffff", // Set to white
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      marginTop: "5px",
+      zIndex: 1000,
+    }}
         >
           {items.map((item) => (
             <div
@@ -330,25 +349,7 @@ const handleHobbyChange = (e) => {
       )}
     </div>
   </label>
-  <div className="profile-info">
-    <label>
-      Name:
-      <input
-        type="text"
-        name="name"
-        value={name}
-        onChange={handleNameChange}
-      />
-    </label>
-    <label>
-      Bio:
-      <textarea
-        name="bio"
-        value={bio}
-        onChange={handleBioChange}
-      />
-    </label>
-  </div>
+
 </div>
 
       {/* User Information Section */}

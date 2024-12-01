@@ -9,6 +9,7 @@ body {
 .signup {
     width: 100%;
     max-width: 600px;
+    height: auto;
     margin: 20px auto;
     padding: 20px;
     background-color: #ccccff;
@@ -196,3 +197,11 @@ button {
     width: 100%; /* Ensure label and input are aligned properly */
 }
 
+.dropdown{
+    width: "200px";
+    margin-top: 4%;
+    position: "relative";
+    background-color: #ffffff;
+    /* border: 2px solid #b11cbc; */
+    border-radius: 10%;
+}
