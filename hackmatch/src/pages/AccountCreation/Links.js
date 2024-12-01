@@ -98,8 +98,8 @@ function Links() {
     };
 
     return (
-        <div>
-            <h1>Let's Get Some Important Links</h1>
+        <div className='signup'>
+            <h1>Let's Get some important Links</h1>
             <form onSubmit={handleSubmit}>
                 <label>Enter the link to your LinkedIn</label>
                 <input
