@@ -79,11 +79,13 @@ function Name() {
     };
 
     return (
-        <div className='signup'>
-            <h1>Account Created</h1>
-            <p>Now we need some basic hacker info from you!</p>
-            <p>Let's Start With Your Name</p>
-            <form onSubmit={handleSubmit}>
+        <div className = 'namebody'>
+        <div className='namecontainer'>
+            <h1>Account Created!</h1>
+                  <hr className = "nameline"/>
+            <p className="text">Now we need some basic hacker info from you!</p>
+            <p>Let's Start With Your Name:</p>
+            <form onSubmit={handleSubmit} className="nameForm">
                 <input
                     type="text"
                     placeholder="First Name"
@@ -100,6 +102,7 @@ function Name() {
                     {loading ? 'Creating Account...' : 'Continue'}
                 </button>
             </form>
+        </div>
         </div>
     );
 }
