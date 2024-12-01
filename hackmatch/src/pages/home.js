@@ -8,7 +8,8 @@ import { FaCheck, FaTimes, FaUndoAlt } from "react-icons/fa";
 import { PiCoffeeBeanFill } from "react-icons/pi";
 import { TbTeapot } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
-
+import { IoSunny, IoMoon, IoLogoJavascript } from 'react-icons/io5';
+import { FaPython, FaJava } from 'react-icons/fa';
 
 import { db } from "../firebase.js";
 import { getDocs, collection, doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
@@ -150,11 +151,6 @@ const Home = () => {
     setIsUndoY(!isUndoY);
     await delay(400);
   };
-  const undoToggleCardN = async () => {
-    setIsUndoN(!isUndoN);
-    await delay(400);
-  };
-
   const undoToggleCardN = async () => {
     setIsUndoN(!isUndoN);
     await delay(400);
