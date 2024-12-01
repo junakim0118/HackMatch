@@ -1,3 +1,9 @@
+
+import { IoHome } from "react-icons/io5";
+import { FaPeopleArrows } from "react-icons/fa6";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
@@ -23,6 +29,7 @@ if (!getApps().length) {
 const db = getFirestore(app);
 
 const email = localStorage.getItem("email");
+
 
 const AccountSettings = () => {
     const [LinkedIn, setLinkedIn] = useState("");
@@ -413,12 +420,12 @@ const handleLogout = () => {
           Log Out
         </button>
       </div>
-      <div className='menus'>
-        <div className='menu'><Link to='/home'>home</Link></div>
-        <div className='menu'>match</div>
-        <div className='menu'>message</div>
-        <div className='menu'><Link to='/AccountSettings'>profile</Link></div>
-      </div>
+      <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
+        <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
 
     </div>
   );
