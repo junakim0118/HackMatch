@@ -14,59 +14,32 @@
   }
   
 body{
-    background-color: #F6CEFC;
+    background-color: #CCCCFF;
 }
 .button1 {
     
     background-color: #b08cec; 
     color: white; /* White text */
     font-size: 16px; /* Text size */
-    font-weight: bold; /* Bold text */
     border: 2px white; /* Remove border */
-    margin-top: -100px;
+    margin-top: -90px;
+    font-weight: 550;
+    box-shadow: 0 0 8px 2px #af51e2;
   
     /* Size and Shape */
     padding: 10px 20px; /* Spacing inside the button */
     border-radius: 50px; /* Makes the button round */
-}@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: white; }
-}
-
-.button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color: #b11cbc;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-}
-
-.button span {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid white;
-    width: 0;
-    animation: typing 2s steps(10, end), blink 0.5s step-end infinite alternate;
 }
   .button2 {
     
-    background-color: #703dbb ; 
+    background-color: #a954e6 ; 
     color: white; /* White text */
     font-size: 16px; /* Text size */
-    font-weight: bold; /* Bold text */
     border: 2px white; /* Remove border */
-    margin: 10px;
+    margin: 20px;
+        box-shadow: 0 0 8px 2px #6b24d5;
+        font-weight: 550;
+
     /* Size and Shape */
     padding: 10px 20px; /* Spacing inside the button */
     border-radius: 50px; /* Makes the button round */

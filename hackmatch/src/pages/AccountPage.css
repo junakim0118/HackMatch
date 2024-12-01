@@ -177,3 +177,26 @@ width: 80%; /* Full width of the container */
   border-top: 2px solid #ccc; /* Add a custom line */
   margin: auto; /* Center the line */
 }
+
+.form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    align-items: center; /* Center-align form elements */
+    width: 100%; /* Full width of the container */
+}
+
+.create {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center-align elements */
+    width: 40%; /* Full width of the container */
+    margin-top: 1rem; /* Add space above the form */
+}
+
+.acc{
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center-align elements */
+    width: 100%; /* Full width of the container */
+    margin-top: 1rem; /* Add space above the form */
+}
