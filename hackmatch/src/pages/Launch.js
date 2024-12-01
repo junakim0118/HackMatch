@@ -14,6 +14,10 @@ const Launch = () => {
          <Link to="/Login">
            <button className="button1"onClick={()=>navigate('/Login')}>Create a new account :)</button>
           </Link>
+
+          <Link to="/Login">
+          <button className ="button2" onClick ={()=>navigate('Login')}>Already have an account? Log in :)</button>
+          </Link>
          </div>
 
        );
