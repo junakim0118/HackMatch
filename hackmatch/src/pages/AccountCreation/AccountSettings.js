@@ -9,10 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { IoHome } from "react-icons/io5";
-import { FaPeopleArrows } from "react-icons/fa6";
-import { BiSolidMessageSquareDetail } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
+
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
