@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-
+import { IoHome } from "react-icons/io5";
+import { FaPeopleArrows } from "react-icons/fa6";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -257,28 +260,35 @@ const handleLogout = () => {
           />
         </label>
         
-        <label>
-        <label>LinkedIn:</label>
+       
+        <label>LinkedIn:
                 <input
-                    type="text"
+                    type="url"
                     name="Linkedin Link"
+                    placeholder="https://link.ca"
                     value={LinkedIn}
                     onChange={(e) => setLinkedIn(e.target.value)}
                 />
-                <label>Github:</label>
+                </label>
+                <label>Github:
                 <input
-                    type="text"
+                    type="url"
                     name="GitHub Link"
+                    placeholder="https://link.ca"
                     value={Github}
                     onChange={(e) => setGithub(e.target.value)}
                 />
-                <label> Portfolio:</label>
+                </label>
+                <label> Portfolio:
                 <input
-                    type="text"
+                    type="url"
                     name="Portfolio Link"
+                    placeholder="https://link.ca"
                     value={Portfolio}
                     onChange={(e) => setPortfolio(e.target.value)}
                 />
+                </label>
+                <label>
   School:
   <select
     name="school"
@@ -413,12 +423,12 @@ const handleLogout = () => {
           Log Out
         </button>
       </div>
-      <div className='menus'>
-        <div className='menu'><Link to='/home'>home</Link></div>
-        <div className='menu'>match</div>
-        <div className='menu'>message</div>
-        <div className='menu'><Link to='/AccountSettings'>profile</Link></div>
-      </div>
+      <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><FaPeopleArrows className='menuIcon'/></div>
+        <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
 
     </div>
   );
