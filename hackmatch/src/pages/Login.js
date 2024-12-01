@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
+import './Login.css';
+
 // Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -64,33 +66,40 @@ function Signup() {
   };
 
   return (
-    <div>
-      <h1>Log in Page</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="page">
+      <div className="container">
+      <h1 className="log">L O G I N</h1>
+      <hr className = "line"/>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="email"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="password"
         />
-        <button type="submit" disabled={loading}>
+    
+        <button type="submit" disabled={loading} className="create">
           {loading ? 'Creating Account...' : 'Sign In'}
         </button>
-        <br></br>
-        <br></br>
+       
       </form>
       <form onSubmit={createAccount}>
-      <label>Dont Have an acocunt yet?</label>
+        <div className="acc">
+      <label>Dont Have an account yet?</label>
         <button type="submit" disabled={loadCreate}>
           {loading ? 'Creating Account...' : 'Click here to sign up!'}
         </button>
+        </div>
       </form>
+      </div>
     </div>
   );
 }
