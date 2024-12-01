@@ -9,7 +9,8 @@ import { PiCoffeeBeanFill } from "react-icons/pi";
 import { TbTeapot } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
 
-
+import {IoSunny, IoMoon, IoLogoJavascript} from "react-icons/io5";
+import {FaPython, FaJava} from "react-icons/fa";
 import { db } from "../firebase.js";
 import { getDocs, collection, doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
@@ -155,17 +156,12 @@ const Home = () => {
     await delay(400);
   };
 
-  const undoToggleCardN = async () => {
-    setIsUndoN(!isUndoN);
-    await delay(400);
-  };
-
   function caffeine(person){
     if(person.caffeine === 'Coffee'){
       return <PiCoffeeBeanFill className='thingIcon'/>;
     } else if (person.caffeine ==='Brewed tea'){
       return <TbTeapot className='thingIcon'/>;
-    } else if (person.caffeine ==='Energy drink'){
+    } else if (person.caffeine ==='Energy Drinks'){
       return <SlEnergy className='thingIcon'/>;
     }else if (person.caffeine ==='No caffeine'){
       return <CiNoWaitingSign className='thingIcon'/>;
@@ -220,17 +216,17 @@ const Home = () => {
     }
   };
   function school(person){
-    if(person.school === 'Western'){
+    if(person.school == 'Western University'){
       return <img src={'./western.png'} className='thingIcon'/>;
-    } else if (person.school ==='Mac'){
+    } else if (person.school =='McMaster University'){
       return <img src={'./mac.png'} className='thingIcon'/>;
-    } else if (person.school ==='Laurier'){
+    } else if (person.school =='Laurier'){
       return <img src={'./laurier.png'} className='thingIcon'/>;
-    }else if (person.school ==='Queens'){
+    }else if (person.school ==`Queen's University`){
       return <img src={'./queens.png'} className='thingIcon'/>;
-    }else if (person.school ==='UofT'){
+    }else if (person.school =='University of Toronto'){
       return <img src={'./uoft.png'} className='thingIcon'/>;
-    }else if (person.school ==='Waterloo'){
+    }else if (person.school =='University of Waterloo'){
       return <img src={'./waterloo.png'} className='thingIcon'/>;
     }
   };
@@ -244,6 +240,7 @@ const Home = () => {
       {persons.length > 0 && (
 
         <div className={`show`}>
+
           <img
                 src={imageMap[persons[personIndex]?.character]}
                 style={{ width: "100%", height: "auto", marginRight: "10px", borderRadius: "2em" }}
@@ -256,7 +253,7 @@ const Home = () => {
             <div className='thing'>{caffeine(persons[personIndex])}</div>
             <div className='thing'>{codingTime(persons[personIndex])}</div>
             <div className='thing'>{language(persons[personIndex])}</div>
-            <div className='thing'><p>{persons[personIndex].school}</p></div>
+            <div className='thing'>{school(persons[personIndex])}</div>
 
           </div>
         </div>
