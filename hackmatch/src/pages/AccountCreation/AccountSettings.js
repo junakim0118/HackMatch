@@ -1,6 +1,35 @@
+
+import { IoHome } from "react-icons/io5";
+import { FaPeopleArrows } from "react-icons/fa6";
+import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+
+// Firebase initialization
+const firebaseConfig = {
+    apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
+    authDomain: "hackmatch-9fef5.firebaseapp.com",
+    projectId: "hackmatch-9fef5",
+    storageBucket: "hackmatch-9fef5.firebasestorage.app",
+    messagingSenderId: "520362196145",
+    appId: "1:520362196145:web:338074b520500558317690",
+};
+let app;
+if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
+} else {
+    app = getApps()[0]; // Use the existing app instance
+}
+
+const db = getFirestore(app);
+
+const email = localStorage.getItem("email");
+
 
 const AccountSettings = () => {
     const [LinkedIn, setLinkedIn] = useState("");
