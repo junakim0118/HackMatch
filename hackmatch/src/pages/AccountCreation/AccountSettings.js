@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AccountSettings.css";
 import { initializeApp, getApps } from "firebase/app";
-import { getFirestore} from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Firebase initialization
@@ -26,6 +26,7 @@ if (!getApps().length) {
     app = getApps()[0]; // Use the existing app instance
 }
 
+const db = getFirestore(app);
 const auth = getAuth(app);
 
 const AccountSettings = () => {
@@ -241,8 +242,7 @@ const handleSchoolChange = (e) => {
 
     return (
       <div className="signup">
-      <h1>Account Settings</h1>
-
+      <h1>A C C O U N T   S E T T I N G S</h1>
       {/* Profile Picture Section */}
 <div className="profile-pic-section">
   <label htmlFor="profilePic">
