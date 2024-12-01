@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Courier New", Courier, monospace;
+
   }
   
   /* Body styling */
@@ -16,6 +18,7 @@
     min-height: 100vh;
     padding: 20px;
     margin: 0;
+
   }
   
   /* Container for the form */
@@ -27,6 +30,7 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
+
   }
   
   /* Title styling */
@@ -35,6 +39,7 @@
     color: #6a0dad; /* Purple */
     margin-bottom: 20px;
     font-weight: 600;
+
   }
   
   /* Input fields styling (now using textarea) */
@@ -48,6 +53,7 @@
     outline: none;
     min-height: 100px; /* Make the text area large enough to hold multiple lines */
     resize: vertical; /* Allow vertical resizing but not horizontal */
+
   }
   
   .bio textarea:focus {

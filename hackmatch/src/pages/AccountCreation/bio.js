@@ -32,6 +32,11 @@ function Bio() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!bio.trim()) {
+            alert("The bio field is required! Please tell us about yourself."); // Alert for empty bio
+            return;
+        }
+
         setLoading(true);
 
         localStorage.setItem("bio", bio);
@@ -72,7 +77,12 @@ function Bio() {
                         value={bio}
                         onChange={handleBioChange}
                     />
-                    <div style={{ fontSize: '14px', color: bio.length === 50 ? 'red' : 'black' }}>
+                    <div
+                        style={{
+                            fontSize: '14px',
+                            color: bio.length === 50 ? 'red' : 'black',
+                        }}
+                    >
                         {bio.length}/50
                     </div>
                 </div>

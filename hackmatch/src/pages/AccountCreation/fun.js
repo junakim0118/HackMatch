@@ -33,8 +33,17 @@ function Fun() {
     const [lang, setLang] = useState('');
     const [school, setSchool] = useState('');
     const [year, setYear] = useState('');
+    const [fuel, setFuel] = useState('');
     const [filteredLanguages, setFilteredLanguages] = useState([]);
     const [filteredSchools, setFilteredSchools] = useState([]);
+    const [midnightsnack, setMidnightsnack] = useState('');
+    const [algorithm, setAlgorithm] = useState('');
+    const [song, setSong] = useState('');
+    const [hobby, setHobby] = useState('');
+
+
+
+
 
     // States for both switches
     const [dayNightMode, setDayNightMode] = useState('day'); // 'day' or 'night'
@@ -45,6 +54,7 @@ function Fun() {
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell"
     ];
     const Schools = ["Western", "Mac", "Laurier", "Queens"];
+    const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
     const YearOptions = [1, 2, 3, 4, "4+"];
 
     const handleLangChange = (e) => {
@@ -98,16 +108,54 @@ function Fun() {
     const handleYearChange = (e) => {
         setYear(e.target.value);
     };
+    // Fun facts
+    const handleSnackChange = (e) => {
+        setMidnightsnack(e.target.value);
+    };
+
+    const handleAlgorithmChange = (e) => {
+        setAlgorithm(e.target.value);
+    };
+
+    const handleSongChange = (e) => {
+        setSong(e.target.value);
+    };
+
+    const handleHobbyChange = (e) => {
+        setHobby(e.target.value);
+    };
+    
+
+
+
+    const handleFuelChange = (e) => {
+        setFuel(e.target.value);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+    
+        // Validation
+        if (!lang || !school || !year || !fuel || !dayNightMode || !frontBackMode) {
+            alert("Please fill out all the fields before proceeding!");
+            setLoading(false);
+            return;
+        }
+    
         localStorage.setItem("day/night", dayNightMode);
         localStorage.setItem("front/back", frontBackMode);
         localStorage.setItem("year", year);
         localStorage.setItem("lang", lang);
         localStorage.setItem("school", school);
+        localStorage.setItem("fuel", fuel);
+        localStorage.setItem("midnightsnack", midnightsnack);
+        localStorage.setItem("algorithm", algorithm);
+        localStorage.setItem("song", song);
+        localStorage.setItem("hobby", hobby);
+
+
+
 
         // Create the document in Firestore
         try {
@@ -120,28 +168,34 @@ function Fun() {
                 bio: localStorage.getItem("bio"),
                 daynight: dayNightMode,
                 frontback: frontBackMode,
-                lang:lang,
-                school:school
+                lang: lang,
+                school: school,
+                fuel: fuel,
+                midnightsnack: midnightsnack,
+                algorithm: algorithm,
+                song:song,
+                hobby:hobby,
             });
+    
+            navigate("/Home");
 
             alert("Uploaded to fb, no next page");
-
-            //navigate("/Fun");
         } catch (err) {
             alert(err.message);
         }
-
+    
         setLoading(false);
     };
 
+    
     return (
         <div className='signup'>
         <div className="form-container">
-            <h1>Who are you???</h1>
+            <h1>What type of Hacker are you?</h1>
 
             {/* Day/Night Selector */}
             <div className="radio-group">
-                <p>Choose your mode:</p>
+                <p>What kind of Hacker are you?:</p>
                 <label className="radio-label">
                     <input 
                         type="radio" 
@@ -150,7 +204,7 @@ function Fun() {
                         onChange={handleDayNightChange} 
                         className="radio-input"
                     />
-                    Day
+                    Day-Hacker
                 </label>
                 <label className="radio-label">
                     <input 
@@ -160,13 +214,13 @@ function Fun() {
                         onChange={handleDayNightChange} 
                         className="radio-input"
                     />
-                    Night
+                    Night-Hacker
                 </label>
             </div>
-
+            <br></br>
             {/* Frontend/Backend Selector */}
             <div className="radio-group">
-                <p>Choose your focus:</p>
+                <p>Whats your speciality?:</p>
                 <label className="radio-label">
                     <input 
                         type="radio" 
@@ -187,11 +241,37 @@ function Fun() {
                     />
                     Backend
                 </label>
+                <label className="radio-label">
+                    <input 
+                        type="radio" 
+                        value="fullstack" 
+                        checked={frontBackMode === 'fullstack'} 
+                        onChange={handleFrontBackChange} 
+                        className="radio-input"
+                    />
+                    FullStack
+                </label>
             </div>
-
+            <br></br>
+            <div className="form-group">
+                <p>Whats Your Hackathon Fuel?</p>
+                <select 
+                    value={fuel} 
+                    onChange={handleFuelChange} 
+                    className="input-field"
+                >
+                    <option value="">Select Fuel</option>
+                    {Caffeine.map((option, index) => (
+                        <option key={index} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <br></br>
             {/* Year Dropdown */}
             <div className="form-group">
-                <p>What year are you in?</p>
+                <p>What school year are you in?</p>
                 <select 
                     value={year} 
                     onChange={handleYearChange} 
@@ -205,7 +285,7 @@ function Fun() {
                     ))}
                 </select>
             </div>
-
+            <br></br>
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-group">
                     <p>What's your favorite language to code in?</p>
@@ -219,18 +299,18 @@ function Fun() {
                     {filteredLanguages.length > 0 && (
                         <ul className="suggestions">
                             {filteredLanguages.map((language, index) => (
-                                <li
+                                <button
                                     key={index}
                                     className="suggestion-item"
                                     onClick={() => handleLanguageClick(language)}
                                 >
                                     {language}
-                                </li>
+                                </button>
                             ))}
                         </ul>
                     )}
                 </div>
-
+                <br></br>
                 <div className="form-group">
                     <p>What school do you go to?</p>
                     <input
@@ -243,17 +323,61 @@ function Fun() {
                     {filteredSchools.length > 0 && (
                         <ul className="suggestions">
                             {filteredSchools.map((school, index) => (
-                                <li
+                                <button
                                     key={index}
                                     className="suggestion-item"
                                     onClick={() => handleSchoolClick(school)}
                                 >
                                     {school}
-                                </li>
+                                </button>
                             ))}
                         </ul>
                     )}
                 </div>
+                {/* fun facts */}
+                <h1>Fun facts about yourself</h1>
+
+            <div className="fun-facts">
+            <label>
+          Go-to Midnight Snack:
+          <input
+            type="text"
+            name="midnight snack"
+            value={midnightsnack.midnightsnack}
+            onChange={handleSnackChange}
+          />
+        </label>
+
+        <label>
+          What sorting algorithm are you?:
+          <input
+            type="text"
+            name="sorting algorithm"
+            value={algorithm.algorithm}
+            onChange={handleAlgorithmChange}
+          />
+        </label>
+
+        <label>
+          What's your favourite song?:
+          <input
+            type="text"
+            name="song"
+            value={song.song}
+            onChange={handleSongChange}
+          />
+        </label>
+
+        <label>
+          What's your coolest hobby?:
+          <input
+            type="text"
+            name="hobby"
+            value={hobby.hobby}
+            onChange={handleHobbyChange}
+          />
+        </label>
+            </div>
 
 
                <Link to="/AccountSettings">
