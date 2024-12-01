@@ -2,7 +2,6 @@ import './home.css';
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import { IoHome } from "react-icons/io5";
-import { FaPeopleArrows } from "react-icons/fa6";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaCheck } from "react-icons/fa";
@@ -122,7 +121,7 @@ const undoToggleCardN = async () => {
 <div className='hackmatchLogo'></div>
 </header>
       {/* Stories Section */}
-      <div className="stories">
+      {/* <div className="stories">
         {[1, 2, 3, 4, 5].map((id) => (
           <div
             key={id}
@@ -132,7 +131,7 @@ const undoToggleCardN = async () => {
             {id}
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Person Section */}
       {persons.map((person, index) => (
@@ -140,7 +139,7 @@ const undoToggleCardN = async () => {
             key={index}
             className={`person ${index === personIndex ? 'show' : 'hide'} ${isUndoY ? 'yes' : isUndoN ? 'no' : isNo ? 'no' : isYes ? 'yes': ''}`}
           >
-        <div className="bitmoji">Bitmoji Content</div>
+        <div className="bitmoji"><Link to='/AccountPage' >Bitmoji Content</Link></div>
 
       {/* Name Section */}
       <p className="name">{name}</p>
@@ -179,7 +178,7 @@ const undoToggleCardN = async () => {
       
       <footer className='menus'>
         <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
-        <div className='menu'><BiSolidMessageSquareDetail className='menuIcon'/></div>
+        <div className='menu'><Link to='/temp'><BiSolidMessageSquareDetail className='menuIcon'/></Link></div>
         <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
       </footer>
 
