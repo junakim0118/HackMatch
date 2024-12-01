@@ -36,8 +36,6 @@ function Signup() {
     e.preventDefault();
     setLoading(true);
 
-    localStorage.setItem("email", email);
-
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
