@@ -37,7 +37,7 @@ const auth = getAuth(app);
 
 const AccountSettings = () => {
 
-        // const [selectedOption, setSelectedOption] = useState(""); // Dropdown state
+        const [selectedOption, setSelectedOption] = useState(""); // Dropdown state
 const [selectedItem, setSelectedItem] = useState(null);
           const items = [
     { id: 1, name: "Character 1", img: pic1 },
@@ -330,37 +330,6 @@ const handleHobbyChange = (e) => {
       )}
     </div>
   </label>
-  {/* <input
-    type="file"
-    id="profilePic"
-    accept="image/*"
-    onChange={handleProfilePicUpload}
-    hidden
-  /> */}
-  {/* <select
-            id="dropdown"
-            className="dropdown"
-            value={selectedOption}
-            onChange={
-                (e) => setSelectedOption(e.target.value)
-                // handleProfilePicUpload;
-                
-            }
-          >
-            <option value="" disabled>Select an option</option>
-            <option value="1">
-                <img src={pic1} alt="Profile" className="profile-pic" />
-            </option>
-            <option value="2">
-                <img src={pic2} alt="Profile" className="profile-pic" />
-            </option>
-            <option value="3">
-                <img src={pic3} alt="Profile" className="profile-pic" />
-            </option>
-             <option value="4">
-                <img src={pic4} alt="Profile" className="profile-pic" />
-            </option>
-          </select> */}
   <div className="profile-info">
     <label>
       Name:
@@ -405,16 +374,6 @@ const handleHobbyChange = (e) => {
                     onChange={(e) => setLinkedIn(e.target.value)}
                 />
                 </label>
-                <input
-                    type="file"
-                    id="profilePic"
-                    accept="image/*"
-                    onChange={(e) => {
-                        const file = e.target.files[0];
-                        if (file) setProfilePic(URL.createObjectURL(file));
-                    }}
-                    hidden
-                />
                 <div className="profile-info">
                     <label>
                         Name:
