@@ -1,16 +1,20 @@
 import './home.css';
-import { useState, Image } from 'react';
-import {Link} from 'react-router-dom';
+import { useState, useEffect, Image } from 'react';
+import { Link } from 'react-router-dom';
 import { IoHome } from "react-icons/io5";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
-import { FaCheck } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
-import { FaUndoAlt } from "react-icons/fa";
-
+import { FaCheck, FaTimes, FaUndoAlt } from "react-icons/fa";
 import { PiCoffeeBeanFill } from "react-icons/pi";
 import { TbTeapot } from "react-icons/tb";
 import { SlEnergy } from "react-icons/sl";
+
+import { IoSunny, IoMoon, IoLogoJavascript } from "react-icons/io5";
+import { FaJava, FaPython } from "react-icons/fa";
+import { TbHtml } from "react-icons/tb";
+import { db } from "../firebase.js";
+import { getDocs, collection, doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
 import { CiNoWaitingSign } from "react-icons/ci";
 import { MdLocalDrink } from "react-icons/md";
 import { FaCubes } from "react-icons/fa";
@@ -32,69 +36,110 @@ import { DiScala } from "react-icons/di";
 import { SiHaskell } from "react-icons/si";
 
 const Home = () => {
-
-  const [name, setName] = useState('juna kim');
+  const [persons, setPersons] = useState([]);
   const [personIndex, setPersonIndex] = useState(0);
+  const [isNo, setIsNo] = useState(false);
+  const [isYes, setIsYes] = useState(false);
+  const [isUndoY, setIsUndoY] = useState(false);
+  const [isUndoN, setIsUndoN] = useState(false);
 
-  const persons = [
-    { name: 'Juna Kim', caffeine: 'Coffee', codingTime: 'Night', language: 'JavaScript', school: 'Western' }, //do status of no, yes, matched
-    { name: 'Millicent Song', caffeine: 'Energy drink', codingTime: 'Day', language: 'Python', school: 'Mac' },
-    { name: 'Nathan Wan', caffeine: 'Coffee', codingTime: 'Night', language: 'Java', school: 'Laurier' },
-    { name: 'Jenusan Yogarajah', caffeine: 'No caffeine', codingTime: 'Night', language: 'TypeScript', school: 'Queens' },
-    // Add more persons as needed
-  ];
+  const auth = getAuth(); // Get the authentication instance
+  const currentUserEmail = auth.currentUser?.email;
 
-  
-    const handleStoryClick = (id) => alert(`You clicked on story ${id}`);
-    const delay = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds));
+  // Fetch users excluding the current user
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const usersSnapshot = await getDocs(collection(db, "Users"));
+        const usersList = usersSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            email: doc.id,
+            algorithm: data.algorithm, // Add algorithm
+            midnightSnack: data.midnightsnack, // Add midnight snack
+            favoriteSong: data.song, // Add favorite song
+            coolestHobby: data.hobby, // Add coolest hobby
+            name: data.firstName + " " + data.lastName || 'No Name',
+          };
+        });
 
-const [isNo, setIsNo] = useState(false);
+        // Exclude the current user from the list
+        const filteredUsers = usersList.filter(user => user.email !== currentUserEmail);
+        setPersons(filteredUsers);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
 
+    if (currentUserEmail) {
+      fetchUsers();
+    }
+  }, [currentUserEmail]);
+
+  // Handle the "No" button click
   const leftToggleCard = async () => {
     setIsNo(!isNo);
     await delay(400);
-    setIsNo(isNo);
     if (personIndex < persons.length - 1) {
-      setPersonIndex(personIndex + 1); // Move to the next person
-      setName(persons[personIndex + 1].name); // Update name to the next person's name
+      setPersonIndex(personIndex + 1);
     }
   };
-  
-  const [isUndoY, setIsUndoY] = useState(false);
-  const [isUndoN, setIsUndoN] = useState(false);
-const undoToggleCardY = async () => {
-  setIsUndoY(!isUndoY);
-        await delay(400);
-        setIsUndoY(isUndoY);
-}
-const undoToggleCardN = async () => {
-  setIsUndoN(!isUndoN);
-        await delay(400);
-        setIsUndoN(isUndoN);
-}
-  const undoToggleCard = async () => {
-    if (personIndex > 0) {
-      
-      if (isNo && !isYes){
-        undoToggleCardY();
-        
-      } else if (isYes && !isNo){
-        undoToggleCardN();
-      }
-      setPersonIndex(personIndex - 1); // Move to the next person
-      setName(persons[personIndex - 1].name); // Update name to the next person's name
-    }
-  };
-  const [isYes, setIsYes] = useState(false);
 
+  // Handle the "Yes" button click
   const rightToggleCard = async () => {
     setIsYes(!isYes);
     await delay(400);
-    setIsYes(isYes);
     if (personIndex < persons.length - 1) {
-      setPersonIndex(personIndex + 1); // Move to the next person
-      setName(persons[personIndex + 1].name); // Update name to the next person's name
+      setPersonIndex(personIndex + 1);
     }
+
+    if (!currentUserEmail) {
+      console.error("No user is currently authenticated.");
+      return;
+    }
+
+    const currentUserRef = doc(db, "Users", currentUserEmail);
+    const otherUserEmail = persons[personIndex].email;
+    const otherUserRef = doc(db, "Users", otherUserEmail);
+
+    // Update likes for the current user
+    await updateDoc(currentUserRef, {
+      likes: arrayUnion(otherUserEmail),
+    });
+
+    // Check if the other user likes the current user
+    const otherUserDoc = await getDoc(otherUserRef);
+    if (otherUserDoc.exists()) {
+      const otherUserLikes = otherUserDoc.data().likes || [];
+      if (otherUserLikes.includes(currentUserEmail)) {
+        // Match found: update matches for both users
+        await updateDoc(currentUserRef, {
+          matches: arrayUnion(otherUserEmail),
+        });
+        await updateDoc(otherUserRef, {
+          matches: arrayUnion(currentUserEmail),
+        });
+
+        alert("Match");
+      }
+    }
+  };
+
+  // Handle the "Undo" button click
+  const undoToggleCard = async () => {
+    if (personIndex > 0) {
+      if (isNo && !isYes) {
+        undoToggleCardY();
+      } else if (isYes && !isNo) {
+        undoToggleCardN();
+      }
+      setPersonIndex(personIndex - 1);
+    }
+  };
+
+  const undoToggleCardY = async () => {
+    setIsUndoY(!isUndoY);
+    await delay(400);
   };
 
   function caffeine(person){
@@ -179,64 +224,48 @@ const undoToggleCardN = async () => {
           <div
             key={id}
             className="story"
-            onClick={() => handleStoryClick(id)}
+            onClick={() => alert(`You clicked on story ${id}`)}
           >
             {id}
           </div>
         ))}
       </div> */}
 
-      {/* Person Section */}
-      {persons.map((person, index) => (
-          <div
-            key={index}
-            className={`person ${index === personIndex ? 'show' : 'hide'} ${isUndoY ? 'yes' : isUndoN ? 'no' : isNo ? 'no' : isYes ? 'yes': ''}`}
-          >
-        <div className="bitmoji"><Link to='/AccountPage' >Bitmoji Content</Link></div>
 
-      {/* Name Section */}
-      <p className="name">{name}</p>
-      {/* Things Section */}
-      <div className="things">
-        <div className='thing'>{caffeine(person)}</div>
-        <div className='thing'>{codingTime(person)}</div>
-        <div className='thing'>{language(person)}</div>
-        <div className='thing'>{school(person)}</div>
-      </div>
-</div>))}
-      
-      
-      {/* Choose Section */}
+      {persons.length > 0 && (
+        <div className={`show`}>
+          <div className="bitmoji">Bitmoji Content</div>
+          <p className="name">{persons[personIndex]?.name}</p>
+          <div className="things">
+            <div className='thing'>{caffeine(persons[personIndex])}</div>
+            <div className='thing'>{codingTime(persons[personIndex])}</div>
+            <div className='thing'>{language(persons[personIndex])}</div>
+            <div className='thing'><p>{persons[personIndex].school}</p></div>
+
+          </div>
+        </div>
+      )}
+
       <div className="choose">
-    
-          <div
-            className="choiceNo"
-            onClick={leftToggleCard}
-          >
-            {isNo ? <FaTimes  className='choiceIcons'/> : <FaTimes  className='choiceIcons'/>}
-          </div>
-          <div
-            className="choiceUndo"
-            onClick={undoToggleCard}
-          >
-            {isUndoY ? <FaUndoAlt className='choiceIcons'/> : <FaUndoAlt className='choiceIcons'/>}
-          </div>
-          <div
-            className="choiceYes"
-            onClick={rightToggleCard}
-          >
-            {isYes ? <FaCheck className='choiceIcons'/> : <FaCheck className='choiceIcons'/>}
-          </div>
+        <div className="choiceNo" onClick={leftToggleCard}>
+          <FaTimes className='choiceIcons' />
+        </div>
+        <div className="choiceUndo" onClick={undoToggleCard}>
+          <FaUndoAlt className='choiceIcons' />
+        </div>
+        <div className="choiceYes" onClick={rightToggleCard}>
+          <FaCheck className='choiceIcons' />
+        </div>
       </div>
-      
-      <footer className='menus'>
-        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
-        <div className='menu'><Link to='/temp'><BiSolidMessageSquareDetail className='menuIcon'/></Link></div>
-        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
-      </footer>
 
+      <footer className='menus'>
+        <div className='menu'><Link to='/home'><IoHome className='menuIcon' /></Link></div>
+        <div className='menu'><Link to='/Temp'><BiSolidMessageSquareDetail className='menuIcon' /></Link></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon' /></Link></div>
+
+      </footer>
     </div>
-    );
-  };
-  
-  export default Home;
+  );
+};
+
+export default Home;
