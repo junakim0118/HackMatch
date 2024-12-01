@@ -101,3 +101,21 @@
     }
   }
   
+  .email {
+    width: 75%;
+    height: 30%;
+    border-radius: 10px;
+    border: 1px solid #b08cec;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.password{
+    width: 75%;
+    height: 30%;
+    border-radius: 10px;
+    border: 1px solid #b08cec;
+    padding: 10px;
+    font-size: 16px;
+
+}

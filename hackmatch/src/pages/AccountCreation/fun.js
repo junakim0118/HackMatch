@@ -8,6 +8,11 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+import pic1 from "../../images/characters/character.jpg";
+import pic2 from "../../images/characters/char2.jpg";
+import pic3 from "../../images/characters/char3.png";
+import pic4 from "../../images/characters/char4.png";
+
 // Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -26,6 +31,25 @@ const db = getFirestore(app);
 const auth = getAuth();
 
 function Fun() {
+
+    const [selectedItem, setSelectedItem] = useState(null);
+          const items = [
+    { id: 1, name: "Character 1", img: pic1 },
+    { id: 2, name: "Character 2", img: pic2 },
+    { id: 3, name: "Character 3", img: pic3 },
+    { id: 4, name: "Character 4", img: pic4 },
+  ];
+
+  const handleSelect = (item) => {
+    setSelectedItem(item);
+  };
+
+
+  const [isOpen, setIsOpen] = useState(false);
+   const toggleDropdown = () => {
+    setIsOpen((prev) => !prev); // Toggle dropdown visibility
+  };
+
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [email, setEmail] = useState(null); // State to store the email
@@ -209,6 +233,76 @@ function Fun() {
         <div className='signup'>
         <div className="form-container">
             <h1>What type of Hacker are you?</h1>
+
+
+<div style={{ width: "200px", margin: "0 auto", position: "relative", marginBottom:"3%" }}>
+      {/* Dropdown button */}
+      <div
+        onClick={toggleDropdown}
+        style={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {selectedItem ? (
+            <>
+              <img
+                src={selectedItem.img}
+                alt={selectedItem.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+              {selectedItem.name}
+            </>
+          ) : (
+            "Select a character:"
+          )}
+        </div>
+        <span>{isOpen ? "▲" : "▼"}</span>
+      </div>
+
+      {/* Dropdown menu */}
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            backgroundColor: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            marginTop: "5px",
+            zIndex: 1000,
+          }}
+        >
+          {items.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "10px",
+                cursor: "pointer",
+                borderBottom: "1px solid #eee",
+              }}
+              onClick={() => handleSelect(item)}
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+              {item.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
 
             {/* Day/Night Selector */}
             <div className="radio-group">
