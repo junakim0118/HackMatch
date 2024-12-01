@@ -197,8 +197,6 @@ function Fun() {
             });
     
             navigate("/Home");
-
-            alert("Uploaded to fb, no next page");
         } catch (err) {
             alert(err.message);
         }
@@ -399,12 +397,10 @@ function Fun() {
             </div>
 
 
-               <Link to="/AccountSettings">
                 <button type="submit" disabled={loading}>
                     {loading ? 'Creating Account...': ''}
                     Submit
                 </button>
-                </Link>
 
             </form>
         </div>
