@@ -49,18 +49,19 @@ const Home = () => {
         const usersList = usersSnapshot.docs.map(doc => {
           const data = doc.data();
           return {
-            email: doc.id,
-            algorithm: data.algorithm, // Add algorithm
-            midnightSnack: data.midnightsnack, // Add midnight snack
-            favoriteSong: data.song, // Add favorite song
-            coolestHobby: data.hobby, // Add coolest hobby
-            name: data.firstName + " " + data.lastName || 'No Name',
+            email: doc.id,  // Use document ID as email
+            caffeine: data.fuel,
+            codingTime: data.daynight,
+            language: data.lang,
+            school: data.school,
+            name: data.firstName + " " + data.lastName || 'No Name', // Default to 'No Name' if not available
           };
         });
 
         // Exclude the current user from the list
         const filteredUsers = usersList.filter(user => user.email !== currentUserEmail);
         setPersons(filteredUsers);
+        console.log(filteredUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -163,9 +164,9 @@ const Home = () => {
   };
 
   function codingTime(person){
-    if(person.codingTime === 'Day'){
+    if(person.codingTime === 'day'){
       return <IoSunny className='thingIcon'/>;
-    } else if (person.codingTime ==='Night'){
+    } else if (person.codingTime ==='night'){
       return <IoMoon className='thingIcon'/>;
     }
   };
