@@ -11,8 +11,6 @@
 
 }
 
-
-
 .page {
     
     display: flex;
@@ -31,6 +29,7 @@
     border: 1px solid #b08cec;
     padding: 10px;
     font-size: 16px;
+    margin-bottom: 1vh;
 }
 
 .password{

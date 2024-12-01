@@ -1,6 +1,6 @@
 
 .home {
-    background-color: #b08cec;
+    background-color: #ccccff;
     border-radius: 0px;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -60,15 +60,17 @@
    width: 100%;
    height:65vh;
    border-radius: 5%;
-   background-color: #703dbb;
+   background-color: #b08cec;
    margin-left: auto;
    margin-right: auto;
    padding: 3%;
    align-self: center;
    transition: transform 0.3s ease, opacity 0.3s ease;
    z-index:5;
-   box-shadow: 0 0 6px 2px #4a05b0;
-
+   box-shadow: 
+   0px 4px 10px rgb(106, 4, 113), /* Top card shadow */
+   0px 8px 15px rgba(106, 4, 113, 0.5), /* Second card shadow (lighter purple) */
+   0px 12px 20px rgba(106, 4, 113, 0.3); /* Third card shadow (fainter purple) */
 }
 .person.show {
     opacity: 1;
@@ -118,20 +120,21 @@
     width: 70px;
     height: 40px;
     border-radius: 50%;
-    background-color:  #a07ce4;
+    background-color:  #ffffff;
     text-align: center;
     justify-content: center;
     align-items: center;
     margin-right:3%;
     padding: 5px;
     margin-top: 2.5%;
-    border: 0.5px solid white;
+    border: 1px solid #8004b2 ;
+    box-shadow: 0 0 5px 2px #703dbb;
 }
 .thing p{
     margin-top:-10%;
 }
 .thingIcon{
-    width: 30px;
+    width: 40px;
     height: 30px;
 }
 .name{
@@ -170,7 +173,13 @@
     text-align: center;
     padding: 5px;
     box-shadow: 0 0 5px 2px rgb(151, 0, 0);
+    transition: background-color 0.3s ease; /* Smooth transition */
 
+}
+.choiceNo:active {
+    background-color: rgb(150, 7, 7); /* Dark green */
+    box-shadow: 0 0 5px 2px rgb(85, 2, 2); /* Adjust the shadow for consistency */
+    transform: scale(0.95); /* Slightly shrink on click for feedback */
 }
 .choiceUndo{
     width: 30%;
@@ -184,7 +193,15 @@
     text-align: center;
     padding: 10px;
     box-shadow: 0 0 5px 2px #703dbb;
+    transition: background-color 0.3s ease; /* Smooth transition */
 
+}
+
+
+.choiceUndo:active {
+    background-color: rgb(103, 0, 114); /* Dark green */
+    box-shadow: 0 0 5px 2px rgb(52, 0, 100); /* Adjust the shadow for consistency */
+    transform: scale(0.95); /* Slightly shrink on click for feedback */
 }
 .choiceYes{
     width: 15%;
@@ -198,8 +215,16 @@
     text-align: center;
     padding: 5px;
     box-shadow: 0 0 5px 2px rgb(34, 129, 0);
-
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
+
+/* Change to darker green on click */
+.choiceYes:active {
+    background-color: rgb(34, 129, 0); /* Dark green */
+    box-shadow: 0 0 5px 2px rgb(20, 100, 0); /* Adjust the shadow for consistency */
+    transform: scale(0.95); /* Slightly shrink on click for feedback */
+}
+
 .choiceIcons{
     width: 30px;
     height: 30px;

@@ -10,6 +10,11 @@ import { initializeApp, getApps } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+import pic1 from "../../images/characters/character.jpg";
+import pic2 from "../../images/characters/char2.jpg";
+import pic3 from "../../images/characters/char3.png";
+import pic4 from "../../images/characters/char4.png";
+
 // Firebase initialization
 const firebaseConfig = {
     apiKey: "AIzaSyBFCkPH2ZbloXAo4rpztmCPQe0zoFiopXQ",
@@ -31,6 +36,28 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 const AccountSettings = () => {
+
+        const [selectedOption, setSelectedOption] = useState(""); // Dropdown state
+const [selectedItem, setSelectedItem] = useState(null);
+          const items = [
+    { id: 1, name: "Character 1", img: pic1 },
+    { id: 2, name: "Character 2", img: pic2 },
+    { id: 3, name: "Character 3", img: pic3 },
+    { id: 4, name: "Character 4", img: pic4 },
+  ];
+
+  const handleSelect = (item) => {
+    setSelectedItem(item);
+  };
+
+
+  const [isOpen, setIsOpen] = useState(false);
+   const toggleDropdown = () => {
+    setIsOpen((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  
+
     const [LinkedIn, setLinkedIn] = useState("");
     const [Github, setGithub] = useState("");
     const [Portfolio, setPortfolio] = useState("");
@@ -48,6 +75,73 @@ const AccountSettings = () => {
     const [profilePic, setProfilePic] = useState(null);
     const [school, setSchool] = useState("");
     const [email, setEmail] = useState("");
+
+//     // Handles profile picture upload
+// const handleProfilePicUpload = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//         setProfilePic(URL.createObjectURL(file)); // Previews uploaded image
+//     }
+// };
+
+// Handles name input
+
+const handleSchoolChange = (e) =>{
+    setSchool(e.target.value);
+};
+const handleNameChange = (e) => {
+    setName(e.target.value);
+};
+
+// Handles bio input
+const handleBioChange = (e) => {
+    setBio(e.target.value);
+};
+
+// Handles caffeine selection
+const handleCaffeineChange = (e) => {
+    setCaffeine(e.target.value);
+};
+
+// Handles day/night selection
+const handleDayorNightChange = (e) => {
+    setDayorNight(e.target.value);
+};
+
+// Handles focus selection
+const handleFocusChange = (e) => {
+    setFocus(e.target.value);
+};
+
+// Handles year selection
+const handleYearChange = (e) => {
+    setYear(e.target.value);
+};
+
+// Handles language selection
+const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+};
+
+// Handles midnight snack input
+const handleSnackChange = (e) => {
+    setMidnightsnack(e.target.value);
+};
+
+// Handles algorithm input
+const handleAlgorithmChange = (e) => {
+    setAlgorithm(e.target.value);
+};
+
+// Handles song input
+const handleSongChange = (e) => {
+    setSong(e.target.value);
+};
+
+// Handles hobby input
+const handleHobbyChange = (e) => {
+    setHobby(e.target.value);
+};
 
     const navigate = useNavigate();
 
@@ -152,33 +246,135 @@ const AccountSettings = () => {
     const programmingLanguages = [
         "JavaScript", "Python", "Java", "C#", "C++", "Ruby", "Go", "Rust",
         "Kotlin", "Swift", "PHP", "TypeScript", "Scala", "Perl", "R", "Haskell",
-    ];
-    const Schools = ["Western", "McMaster", "Laurier", "Queens"];
-    const Caffeine = ["Coffee", "Brewed tea", "Energy Drinks", "No caffeine", "Matcha", "Sugar"];
+      ];
+      const Schools = ["Western", "McMaster", "Laurier", "Queens"];
+      const Caffeine =["Coffee","Brewed tea","Energy Drinks","No caffeine","Matcha","Sugar"]
 
     return (
         <div className="signup">
-            <h1>Account Settings</h1>
+            <h1>A C C O U N T S E T T I N G S</h1>
+      {/* Profile Picture Section */}
+<div className="profile-pic-section">
+  <label htmlFor="profilePic">
+    {/* <img
+      src={profilePic || "https://via.placeholder.com/150"}
+      alt="Profile"
+      className="profile-pic"
+    /> */}
+    <div className="dropdown">
+      {/* Dropdown button */}
+      <div
+        onClick={toggleDropdown}
+        style={{
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {selectedItem ? (
+            <>
+              <img
+                src={selectedItem.img}
+                alt={selectedItem.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px", borderRadius: "50%" }}
+              />
+              {selectedItem.name}
+            </>
+          ) : (
+            "Select a character:"
+          )}
+        </div>
+        <span>{isOpen ? "▲" : "▼"}</span>
+      </div>
 
-            {/* Profile Picture Section */}
-            <div className="profile-pic-section">
-                <label htmlFor="profilePic">
-                    <img
-                        src={profilePic || "https://via.placeholder.com/150"}
-                        alt="Profile"
-                        className="profile-pic"
-                    />
-                </label>
+      {/* Dropdown menu */}
+      {isOpen && (
+        <div
+              style={{
+      position: "absolute",
+      width: "100%",
+      backgroundColor: "#ffffff", // Set to white
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      marginTop: "5px",
+      zIndex: 1000,
+    }}
+        >
+          {items.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "10px",
+                cursor: "pointer",
+                borderBottom: "1px solid #eee",
+              }}
+              onClick={() => handleSelect(item)}
+            >
+              <img
+                src={item.img}
+                alt={item.name}
+                style={{ width: "30px", height: "30px", marginRight: "10px" }}
+              />
+              {item.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </label>
+
+</div>
+  <div className="profile-info">
+    <label>
+      Name:
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleNameChange}
+      />
+    </label>
+    <label>
+      Bio:
+      <textarea
+        name="bio"
+        value={bio}
+        onChange={handleBioChange}
+      />
+    </label>
+  </div>
+
+      {/* User Information Section */}
+      <div className="user-info">
+
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e)=> setEmail(e.target.value)}
+          />
+        </label>
+        
+       
+        <label>LinkedIn:
                 <input
-                    type="file"
-                    id="profilePic"
-                    accept="image/*"
-                    onChange={(e) => {
-                        const file = e.target.files[0];
-                        if (file) setProfilePic(URL.createObjectURL(file));
-                    }}
-                    hidden
+                    type="url"
+                    name="Linkedin Link"
+                    placeholder="https://link.ca"
+                    value={LinkedIn}
+                    onChange={(e) => setLinkedIn(e.target.value)}
                 />
+                </label>
                 <div className="profile-info">
                     <label>
                         Name:
@@ -306,13 +502,20 @@ const AccountSettings = () => {
                     </select>
                 </label>
             </div>
+           
 
             {/* Submit and Logout */}
             <div className="actions">
                 <button onClick={handleSubmit}>Update Settings</button>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
+            <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/temp'><BiSolidMessageSquareDetail className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
         </div>
+         
     );
 };
 

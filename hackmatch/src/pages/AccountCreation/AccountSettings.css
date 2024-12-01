@@ -1,7 +1,7 @@
 /* General Styling */
 body {
     font-family: "Courier New", Courier, monospace; 
-    background-color: #f9f9f9;
+    background-color: #ccccff;
     font-weight: bold;
 }
 
@@ -9,18 +9,12 @@ body {
 .signup {
     width: 100%;
     max-width: 600px;
+    height: auto;
     margin: 20px auto;
     padding: 20px;
-    background-color: white;
+    background-color: #ccccff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    font-family: "Courier New", Courier, monospace; 
 }
 
 /* Profile Picture Section */
@@ -38,7 +32,7 @@ h1 {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #b11cbc;
+    border: 0.3vh solid #b11cbc;
     cursor: pointer;
 }
 
@@ -56,6 +50,11 @@ h1 {
     justify-content: space-between;
     gap: 5px; /* Minimal gap between label and input */
     font-size: 1.05rem;
+    width: 100%;
+    color: white;
+    font-weight: 550;
+    border-bottom: 0.01vh solid #ffffff; /* Add a line under each label */
+    padding-bottom: 0.1vh; /* Add some space between the text and the line */
     width: 100%;
 }
 
@@ -89,10 +88,16 @@ input:focus, textarea:focus, select:focus {
     display: flex;
     align-items: center; /* Align label and input side-by-side */
     gap: 5px; /* Minimal space between label and input */
-    color: #000000;
+    color: #ffffff;
     font-family: "Courier New", Courier, monospace; 
     font-size: 1rem;
     margin-bottom: 5px; /* Reduce space between rows */
+    font-weight: 550;
+
+    border-bottom: 0.01vh solid #ffffff; /* Add a line under each label */
+    padding-bottom: 0.1vh; /* Add some space between the text and the line */
+    width: 100%;
+
 }
 
 .user-info input,
@@ -105,6 +110,7 @@ input:focus, textarea:focus, select:focus {
     border-radius: 5px;
     box-sizing: border-box;
     font-family: "Courier New", Courier, monospace; 
+    font-weight: 500;
 }
 
 /* Button Group */
@@ -126,7 +132,7 @@ button {
 }
 
 .save-button {
-    background-color: #b11cbc;
+    background-color: #af51e2;
     color: white;
 }
 
@@ -191,3 +197,11 @@ button {
     width: 100%; /* Ensure label and input are aligned properly */
 }
 
+.dropdown{
+    width: "200px";
+    margin-top: 4%;
+    position: "relative";
+    background-color: #ffffff;
+    /* border: 2px solid #b11cbc; */
+    border-radius: 10%;
+}
