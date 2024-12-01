@@ -1,5 +1,5 @@
 import './home.css';
-import { useState } from 'react';
+import { useState, Image } from 'react';
 import {Link} from 'react-router-dom';
 import { IoHome } from "react-icons/io5";
 import { FaPeopleArrows } from "react-icons/fa6";
@@ -29,9 +29,9 @@ const Home = () => {
 
   const persons = [
     { name: 'Juna Kim', caffeine: 'coffee', codingTime: 'night', language: 'js', school: 'Western' }, //do status of no, yes, matched
-    { name: 'Millicent Song', caffeine: 'energy drink', codingTime: 'day', language: 'python', school: 'Western' },
-    { name: 'Nathan Wan', caffeine: 'coffee', codingTime: 'night', language: 'java', school: 'Western' },
-    { name: 'Jenusan Yogarajah', caffeine: 'coffee', codingTime: 'night', language: 'html', school: 'Western' },
+    { name: 'Millicent Song', caffeine: 'energy drink', codingTime: 'day', language: 'python', school: 'Mac' },
+    { name: 'Nathan Wan', caffeine: 'coffee', codingTime: 'night', language: 'java', school: 'Laurier' },
+    { name: 'Jenusan Yogarajah', caffeine: 'coffee', codingTime: 'night', language: 'html', school: 'Queens' },
     // Add more persons as needed
   ];
 
@@ -114,7 +114,18 @@ const undoToggleCardN = async () => {
     }else if (person.language ==='html'){
       return <TbHtml className='thingIcon'/>; 
     }
-  }
+  };
+  function school(person){
+    if(person.school === 'Western'){
+      return <img src={'./western.png'} className='thingIcon'/>;
+    } else if (person.school ==='Mac'){
+      return <img src={'./mac.png'} className='thingIcon'/>;
+    } else if (person.school ==='Laurier'){
+      return <img src={'./laurier.png'} className='thingIcon'/>;
+    }else if (person.school ==='Queens'){
+      return <img src={'./queens.png'} className='thingIcon'/>;
+    }
+  };
     return (
         <div className='home'>
           <header className="logos">
@@ -149,7 +160,7 @@ const undoToggleCardN = async () => {
         <div className='thing'>{caffeine(person)}</div>
         <div className='thing'>{codingTime(person)}</div>
         <div className='thing'>{language(person)}</div>
-        <div className='thing'><p>{person.school}</p></div>
+        <div className='thing'>{school(person)}</div>
       </div>
 </div>))}
       
