@@ -158,7 +158,7 @@ const AccountSettings = () => {
 
     return (
         <div className="signup">
-            <h1>Account Settings</h1>
+            <h1>A C C O U N T S E T T I N G S</h1>
 
             {/* Profile Picture Section */}
             <div className="profile-pic-section">
@@ -306,13 +306,20 @@ const AccountSettings = () => {
                     </select>
                 </label>
             </div>
+           
 
             {/* Submit and Logout */}
             <div className="actions">
                 <button onClick={handleSubmit}>Update Settings</button>
                 <button onClick={handleLogout}>Log Out</button>
             </div>
+            <footer className='menus'>
+        <div className='menu'><Link to='/home' ><IoHome className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/temp'><BiSolidMessageSquareDetail className='menuIcon'/></Link></div>
+        <div className='menu'><Link to='/AccountSettings'><CgProfile className='menuIcon'/></Link></div>
+      </footer>
         </div>
+         
     );
 };
 
